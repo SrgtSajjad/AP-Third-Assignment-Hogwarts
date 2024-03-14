@@ -13,4 +13,19 @@ public abstract class Educational extends Account {
     public abstract void takeCourses();
     public abstract void takeSortingQuiz();
 
+    public ArrayList<String> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(ArrayList<String> courses) {
+        this.courses = courses;
+    }
+
+    public ArrayList<String> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<String> students) {
+        this.students = students;
+    }
 }
