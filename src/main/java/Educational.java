@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class Educational extends Account {
 
-    private ArrayList<String> courses = new ArrayList<String>();
-    private ArrayList<String> students = new ArrayList<String>();
+    static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
+    static ArrayList<Student> students = new ArrayList<Student>();
     private String house;
 
     public Educational(String username, String password, String role) {
@@ -37,21 +37,16 @@ public class Educational extends Account {
         }
     }
 
-    public ArrayList<String> getCourses() {
-        return courses;
+    public static ArrayList<Teacher> getTeachers() {
+        return teachers;
     }
 
-    public void setCourses(ArrayList<String> courses) {
-        this.courses = courses;
-    }
 
-    public ArrayList<String> getStudents() {
+    public static ArrayList<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(ArrayList<String> students) {
-        this.students = students;
-    }
+
 
     public String getHouse() {
         return house;
