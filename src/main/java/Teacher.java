@@ -2,16 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Teacher extends Educational {
-    private ArrayList<Course> coursesTaken = new ArrayList<Course>();
 
     public Teacher(String username, String password, String role) {
         super(username, password, role);
     }
+
     int score;
 
-    public void takeCourses(Course course) {
-        coursesTaken.add(course);
-    }
 
     public void teach(Course course) {
         Scanner microphone = new Scanner(System.in);
@@ -26,9 +23,6 @@ public class Teacher extends Educational {
         System.out.println("Lecture has ended.");
     }
 
-    public ArrayList<Course> getCoursesTaken() {
-        return coursesTaken;
-    }
 
     public void scoreStudents(Course course) {
         System.out.println("Choose a student from the list above: ");
@@ -61,7 +55,7 @@ public class Teacher extends Educational {
         int i = 0;
         System.out.println("Choose a course: ");
 
-        for (Course course : coursesTaken) {
+        for (Course course : getCoursesTaken()) {
             i++;
             System.out.println(i + "." + course.title);
         }
@@ -70,23 +64,23 @@ public class Teacher extends Educational {
         int number;
         while (true) {
             number = scanner.nextInt();
-            if (number - 1 <= coursesTaken.size()) {
+            if (number - 1 <= getCoursesTaken().size()) {
                 break;
             } else {
                 System.out.println("Error: Course unavailable, please select a number from above");
             }
         }
 
-        System.out.println("Students participating in " + coursesTaken.get(number - 1).title);
+        System.out.println("Students participating in " + getCoursesTaken().get(number - 1).title);
         i = 0;
-        for (Student student : coursesTaken.get(number - 1).participatingStudents) {
+        for (Student student : getCoursesTaken().get(number - 1).participatingStudents) {
             i++;
             System.out.println(i + "." + student.getUsername());
         }
 
         System.out.println("Type \"score\" to enter scoring menu");
         if (scanner.next() == "score") {
-            scoreStudents(coursesTaken.get(number - 1));
+            scoreStudents(getCoursesTaken().get(number - 1));
         }
 
     }

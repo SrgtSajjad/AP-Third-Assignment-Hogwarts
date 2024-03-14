@@ -5,6 +5,9 @@ public class Educational extends Account {
 
     static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     static ArrayList<Student> students = new ArrayList<Student>();
+    static ArrayList<Course> courses = new ArrayList<Course>();
+    private ArrayList<Course> coursesTaken = new ArrayList<Course>();
+
     private String house;
 
     public Educational(String username, String password, String role) {
@@ -13,6 +16,10 @@ public class Educational extends Account {
 
     public void signUp() {
 
+    }
+
+    public void takeCourses(Course course) {
+        coursesTaken.add(course);
     }
 
     public void takeSortingQuiz() {
@@ -46,6 +53,9 @@ public class Educational extends Account {
         return students;
     }
 
+    public ArrayList<Course> getCoursesTaken() {
+        return coursesTaken;
+    }
 
 
     public String getHouse() {
