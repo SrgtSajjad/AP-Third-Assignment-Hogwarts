@@ -1,14 +1,19 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Teacher extends Educational {
+    int score;
 
     public Teacher(String username, String password, String role) {
         super(username, password, role);
     }
 
-    int score;
-
+    public void viewCoursesTaken() {
+        int i = 0;
+        for (Course course : getCoursesTaken()) {
+            i++;
+            System.out.println(i + "." + course.title);
+        }
+    }
 
     public void teach(Course course) {
         Scanner microphone = new Scanner(System.in);
@@ -82,6 +87,7 @@ public class Teacher extends Educational {
         if (scanner.next() == "score") {
             scoreStudents(getCoursesTaken().get(number - 1));
         }
+
 
     }
 
