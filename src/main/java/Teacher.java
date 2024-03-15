@@ -47,22 +47,22 @@ public class Teacher extends Educational {
         System.out.println("0. Exit");
         for (Course course : getCoursesTaken()) {
             i++;
-            System.out.println(i + ". " + course.title);
+            System.out.println(i + ". " + course.getTitle());
         }
         Scanner scanner = new Scanner(System.in);
+        Course course = null;
         while (true) {
             System.out.print("Enter the course you would like to teach: ");
             i = scanner.nextInt();
             if (i == 0) {
                 break;
             } else if (i - 1 < Course.courses.size() && i - 1 >= 0) {
-                Course course = Course.courses.get(i - 1);
-                getCoursesTaken().add(course);
+                course = Course.courses.get(i - 1);
                 break;
             }
+            System.out.print("Error: Course unavailable, please choose from the list above");
 
         }
-        System.out.print("Error: Course unavailable, please choose from the list above");
 
 
         Scanner microphone = new Scanner(System.in);
@@ -71,6 +71,7 @@ public class Teacher extends Educational {
             if (lecture == "exit") {
                 break;
             }
+            System.out.println("Course: " + course.getTitle());
             System.out.println("Teacher: " + getUsername());
             System.out.println("Lecture: " + lecture);
         }
@@ -82,7 +83,7 @@ public class Teacher extends Educational {
         System.out.println("0. Exit");
         for (Course course : Course.courses) {
             i++;
-            System.out.println(i + ". " + course.title + " Teacher: " + course.teacher.getUsername());
+            System.out.println(i + ". " + course.getTitle() + " Teacher: " + course.getTeacher().getUsername());
         }
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -90,10 +91,11 @@ public class Teacher extends Educational {
             i = scanner.nextInt();
             if (i == 0) {
                 break;
-            } else if (Course.courses.get(i - 1).teacher != null) {
+            } else if (Course.courses.get(i - 1).getTeacher() != null) {
                 System.out.print("This course already has a teacher, please choose another one");
             } else if (i - 1 < Course.courses.size() && i - 1 >= 0) {
                 Course course = Course.courses.get(i - 1);
+                course.setTeacher(this);
                 getCoursesTaken().add(course);
                 break;
             }
@@ -156,7 +158,7 @@ public class Teacher extends Educational {
 
         for (Course course : getCoursesTaken()) {
             i++;
-            System.out.println(i + "." + course.title);
+            System.out.println(i + "." + course.getTitle());
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -170,7 +172,7 @@ public class Teacher extends Educational {
             }
         }
 
-        System.out.println("Students participating in " + getCoursesTaken().get(number - 1).title);
+        System.out.println("Students participating in " + getCoursesTaken().get(number - 1).getTitle());
         i = 0;
         for (Student student : getCoursesTaken().get(number - 1).participatingStudents) {
             i++;

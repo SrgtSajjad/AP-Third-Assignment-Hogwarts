@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Course {
-    String title;
-    Teacher teacher;
+    private String title;
+    private Teacher teacher;
     UUID courseID;
     private String assignment;
     static ArrayList<Course> courses = new ArrayList<Course>();
@@ -16,7 +16,27 @@ public class Course {
         courseID = UUID.randomUUID();
     }
 
+    public String getAssignment() {
+        return assignment;
+    }
+
     public void setAssignment(String assignment) {
         this.assignment = assignment;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }
