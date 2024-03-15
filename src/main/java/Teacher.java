@@ -3,8 +3,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Teacher extends Educational {
-    ArrayList<Student> positiveFeedback = new ArrayList<Student>();
-    ArrayList<Student> negativeFeedback = new ArrayList<Student>();
+    ArrayList<Student> positiveFeedback = new ArrayList<>();
+    ArrayList<Student> negativeFeedback = new ArrayList<>();
     int score;
 
     public Teacher(String username, String password, String role) {

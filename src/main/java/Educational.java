@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class Educational extends Account {
 
-    static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
-    static ArrayList<Student> students = new ArrayList<Student>();
-    private ArrayList<Course> coursesTaken = new ArrayList<Course>();
+    static ArrayList<Teacher> teachers = new ArrayList<>();
+    static ArrayList<Student> students = new ArrayList<>();
+    private ArrayList<Course> coursesTaken = new ArrayList<>();
 
     private String house;
     private boolean sortingQuizCapability;
