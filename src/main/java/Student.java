@@ -63,12 +63,11 @@ public class Student extends Educational {
         while (true) {
             System.out.print("Enter the course you would like to take: ");
             i = scanner.nextInt();
-            if (i-1 < Course.courses.size() && i-1 >= 0) {
-                Course course = Course.courses.get(i-1);
+            if (i - 1 < Course.courses.size() && i - 1 >= 0) {
+                Course course = Course.courses.get(i - 1);
                 getCoursesTaken().add(course);
                 break;
-            }
-            else if (i == 0) {
+            } else if (i == 0) {
                 break;
             }
             System.out.print("Error: Course unavailable, please choose from the list above");
@@ -114,5 +113,45 @@ public class Student extends Educational {
     }
 
     public void menu() {
+        boolean flag = true;
+        while (flag) {
+            score = positiveFeedback.size() - negativeFeedback.size();
+            System.out.println("~~| Student Menu |~~\n" +
+                    "\nUsername: " + getUsername() +
+                    "\nHouse: " + getHouse() +
+                    "\nScore: " + score +
+                    "\n0. Exit" +
+                    "\n1. Take Sorting quiz" +
+                    "\n2. Take Course" +
+                    "\n3. View Teacher's List" +
+                    "\n4. Score Teachers" +
+                    "\n5. View Courses Taken");
+            Scanner scanner = new Scanner(System.in);
+            int command;
+            System.out.print("Your command: ");
+            command = scanner.nextInt();
+            switch (command) {
+                case 0:
+                    flag = false;
+                    break;
+                case 1:
+                    takeSortingQuiz();
+                    break;
+                case 2:
+                    takeCourses();
+                    break;
+                case 3:
+                    viewTeachersList();
+                    break;
+                case 4:
+                    scoreTeachers();
+                    break;
+                case 5:
+                    viewCoursesTaken();
+                    break;
+                default:
+                    System.out.println("Error: Option is not available, please choose from the list above");
+            }
+        }
     }
 }
