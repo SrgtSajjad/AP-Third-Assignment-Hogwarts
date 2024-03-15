@@ -8,15 +8,16 @@ public class Educational extends Account {
     private ArrayList<Course> coursesTaken = new ArrayList<Course>();
 
     private String house;
+    private boolean sortingQuizCapability;
 
     public Educational(String username, String password, String role) {
         super(username, password, role);
+        sortingQuizCapability = true;
     }
 
     public void signUp() {
 
     }
-
 
 
     public void viewCoursesTaken() {
@@ -28,24 +29,28 @@ public class Educational extends Account {
     }
 
     public void takeSortingQuiz() {
-        System.out.println("Which house would you fit in best?");
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("1. Gryffindor\n2. Ravenclaw\n3. Slytherin\n4. Hufflepuff");
-
-
-        switch (scanner.nextInt()) {
-            case 1:
-                house = "Gryffindor";
-                break;
-            case 2:
-                house = "Ravenclaw";
-                break;
-            case 3:
-                house = "Slytherin";
-                break;
-            case 4:
-                house = "Hufflepuff";
-                break;
+        if (sortingQuizCapability) {
+            System.out.println("Which house would you fit in best?");
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("1. Gryffindor\n2. Ravenclaw\n3. Slytherin\n4. Hufflepuff");
+            switch (scanner.nextInt()) {
+                case 1:
+                    house = "Gryffindor";
+                    break;
+                case 2:
+                    house = "Ravenclaw";
+                    break;
+                case 3:
+                    house = "Slytherin";
+                    break;
+                case 4:
+                    house = "Hufflepuff";
+                    break;
+            }
+            sortingQuizCapability = false;
+        }
+        else {
+            System.out.println("You have already been sorted!\nYour house: " + house);
         }
     }
 
@@ -66,7 +71,4 @@ public class Educational extends Account {
         return house;
     }
 
-    public void setHouse(String house) {
-        this.house = house;
-    }
 }
