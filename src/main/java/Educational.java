@@ -5,7 +5,6 @@ public class Educational extends Account {
 
     static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     static ArrayList<Student> students = new ArrayList<Student>();
-    static ArrayList<Course> courses = new ArrayList<Course>();
     private ArrayList<Course> coursesTaken = new ArrayList<Course>();
 
     private String house;
