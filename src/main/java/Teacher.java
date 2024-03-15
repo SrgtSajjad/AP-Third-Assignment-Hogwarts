@@ -1,7 +1,10 @@
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Teacher extends Educational {
+    ArrayList<Student> positiveFeedback = new ArrayList<Student>();
+    ArrayList<Student> negativeFeedback = new ArrayList<Student>();
     int score;
 
     public Teacher(String username, String password, String role) {
@@ -26,30 +29,42 @@ public class Teacher extends Educational {
                 if (teacher.validatePassword(password)) {
                     System.out.println("-Account Verified-\nWelcome " + teacher.getUsername());
                     break;
-                }
-                else if (Objects.equals(password, "exit"))
+                } else if (Objects.equals(password, "exit"))
                     break;
                 System.out.println("Error: Authentication failed,Please re-enter your password\n\nType \"exit\" to leave to menu");
 
             }
             return teacher;
-        }
-        else {
+        } else {
             System.out.println("Error: User not available, please try again");
         }
         System.out.println("Error: Login failed");
         return null;
     }
 
-    public void viewCoursesTaken() {
+    public void teach() {
         int i = 0;
+        System.out.println("0. Exit");
         for (Course course : getCoursesTaken()) {
             i++;
-            System.out.println(i + "." + course.title);
+            System.out.println(i + ". " + course.title);
         }
-    }
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("Enter the course you would like to teach: ");
+            i = scanner.nextInt();
+            if (i == 0) {
+                break;
+            } else if (i - 1 < Course.courses.size() && i - 1 >= 0) {
+                Course course = Course.courses.get(i - 1);
+                getCoursesTaken().add(course);
+                break;
+            }
 
-    public void teach(Course course) {
+        }
+        System.out.print("Error: Course unavailable, please choose from the list above");
+
+
         Scanner microphone = new Scanner(System.in);
         while (true) {
             String lecture = microphone.nextLine();
@@ -62,6 +77,31 @@ public class Teacher extends Educational {
         System.out.println("Lecture has ended.");
     }
 
+    public void takeCourses() {
+        int i = 0;
+        System.out.println("0. Exit");
+        for (Course course : Course.courses) {
+            i++;
+            System.out.println(i + ". " + course.title + " Teacher: " + course.teacher.getUsername());
+        }
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("Enter the course you would like to take: ");
+            i = scanner.nextInt();
+            if (i == 0) {
+                break;
+            } else if (Course.courses.get(i - 1).teacher != null) {
+                System.out.print("This course already has a teacher, please choose another one");
+            } else if (i - 1 < Course.courses.size() && i - 1 >= 0) {
+                Course course = Course.courses.get(i - 1);
+                getCoursesTaken().add(course);
+                break;
+            }
+
+        }
+        System.out.print("Error: Course unavailable, please choose from the list above");
+    }
+
 
     public void scoreStudents(Course course) {
         System.out.println("Choose a student from the list above: ");
@@ -72,21 +112,41 @@ public class Teacher extends Educational {
             if (number - 1 <= course.participatingStudents.size()) {
                 break;
             } else {
-                System.out.println("Error: Course unavailable, please select a number from above");
+                System.out.println("Error: Student unavailable, please select a number from above");
             }
         }
-        int newScore;
-        int index = course.participatingStudents.get(number - 1).getCoursesTaken().indexOf(course);
-        System.out.println("Changing score for: " + course.participatingStudents.get(number - 1).getUsername() + "\nScore: " + course.participatingStudents.get(number - 1).scores.get(index) + "/100");
-        while (true) {
-            newScore = scanner.nextInt();
-            if (newScore <= 100) {
-                course.participatingStudents.get(number - 1).scores.set(index, newScore);
-                break;
-            } else {
-                System.out.println("Error: Course unavailable, please select a number from above");
+
+        Student student = course.participatingStudents.get(number - 1);
+        boolean flag = true;
+        while (flag) {
+            System.out.println(student.getUsername() + "\n0. Cancel\n1. Give positive feedback\n2. Give negative feedback\n 3. retract feedback");
+            number = scanner.nextInt();
+            switch (number) {
+                case 0:
+                    flag = false;
+                    break;
+                case 1:
+                    if (!student.positiveFeedback.contains(this)) {
+                        student.positiveFeedback.add(this);
+                        System.out.println("Thanks for your feedback");
+                    } else
+                        System.out.println("You have already gave a feedback for this student, retract first to change it");
+                    break;
+                case 2:
+                    if (!student.negativeFeedback.contains(this)) {
+                        student.negativeFeedback.add(this);
+                        System.out.println("Thanks for your feedback");
+                    } else
+                        System.out.println("You have already gave a feedback for this student, retract first to change it");
+                    break;
+                case 3:
+                    student.positiveFeedback.remove(this);
+                    student.negativeFeedback.remove(this);
+                    break;
+
             }
         }
+
 
     }
 
@@ -118,7 +178,7 @@ public class Teacher extends Educational {
         }
 
         System.out.println("Type \"score\" to enter scoring menu");
-        if (scanner.next() == "score") {
+        if (Objects.equals(scanner.next(), "score")) {
             scoreStudents(getCoursesTaken().get(number - 1));
         }
 

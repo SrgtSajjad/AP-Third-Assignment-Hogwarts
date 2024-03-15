@@ -17,8 +17,14 @@ public class Educational extends Account {
 
     }
 
-    public void takeCourses(Course course) {
-        coursesTaken.add(course);
+
+
+    public void viewCoursesTaken() {
+        int i = 0;
+        for (Course course : getCoursesTaken()) {
+            i++;
+            System.out.println(i + "." + course.title);
+        }
     }
 
     public void takeSortingQuiz() {
