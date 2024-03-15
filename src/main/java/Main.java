@@ -91,11 +91,9 @@ public class Main {
             }
         }
         else if (Objects.equals(role, 4)) {
-            Student student = Student.login();
-            if (student != null) {
-                if (!student.isSignedUp())
-                    student.signUp();
-                student.menu();
+            Hogwarts hogwarts = Hogwarts.login();
+            if (hogwarts != null) {
+                hogwarts.menu();
             }
         }
     }
