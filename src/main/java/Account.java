@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.UUID;
 
 public class Account implements AccountManagement {
@@ -33,7 +34,7 @@ public class Account implements AccountManagement {
 
     @Override
     public boolean validatePassword(String enteredPassword) {
-        if (this.password == enteredPassword)
+        if (Objects.equals(this.password, enteredPassword))
             return true;
         return false;
     }
