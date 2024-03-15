@@ -37,18 +37,25 @@ public class Main {
             System.out.print("Password: ");
             String password = scanner.next();
             System.out.println("Please wait for an admin to accept your request");
-            //Teacher teacher = new Teacher(username,  password, role);
-            //Educational.teachers.add(teacher);
+            Teacher teacher = new Teacher(username, password, role);
+            Educational.teachers.add(teacher);
             //TODO admin_request
         }
 
     }
 
     public static void login() {
-        System.out.println("Your role:\n1. Teacher\n2. Student");
-        Scanner scanner = new Scanner(System.in);
-        int role = scanner.nextInt();
-        if (Objects.equals(role, 1)) {
+        int role;
+        while (true) {
+            System.out.println("Your role:\n1. Teacher\n2. Student");
+            Scanner scanner = new Scanner(System.in);
+            role = scanner.nextInt();
+            if (role >= 0 && role < 6)
+                break;
+        }
+        if (Objects.equals(role, 0)) {
+            // do nothing to return to main menu
+        } else if (Objects.equals(role, 1)) {
             Teacher teacher = Teacher.login();
             if (teacher != null)
                 teacher.menu();
