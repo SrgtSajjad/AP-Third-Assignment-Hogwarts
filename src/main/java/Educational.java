@@ -28,10 +28,34 @@ public class Educational extends Account {
             setSpeciality(scanner.next());
             setSignedUp(true);
             System.out.println("-Sign Up Completed-");
-        }
-        else {
+        } else {
             System.out.println("You have already completed Sign Up");
         }
+    }
+
+    public void changeAccountCredentials() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose which you'd like to change:\n1. Username\n2. Password\n0. Exit");
+        boolean flag = true;
+        while (flag) {
+            switch (scanner.nextInt()) {
+                case 0:
+                    flag = false;
+                    break;
+                case 1:
+                    changeUsername(scanner.next());
+                    flag = false;
+                    break;
+                case 2:
+                    changePassword(scanner.next());
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Error: House unavailable, please choose correctly from the options above");
+                    break;
+            }
+        }
+
     }
 
 
@@ -50,23 +74,32 @@ public class Educational extends Account {
             System.out.println("Which house would you fit in best?");
             Scanner scanner = new Scanner(System.in);
             System.out.println("1. Gryffindor\n2. Ravenclaw\n3. Slytherin\n4. Hufflepuff");
-            switch (scanner.nextInt()) {
-                case 1:
-                    house = "Gryffindor";
-                    break;
-                case 2:
-                    house = "Ravenclaw";
-                    break;
-                case 3:
-                    house = "Slytherin";
-                    break;
-                case 4:
-                    house = "Hufflepuff";
-                    break;
+            boolean flag = true;
+            while (flag) {
+                switch (scanner.nextInt()) {
+                    case 1:
+                        house = "Gryffindor";
+                        flag = false;
+                        break;
+                    case 2:
+                        house = "Ravenclaw";
+                        flag = false;
+                        break;
+                    case 3:
+                        house = "Slytherin";
+                        flag = false;
+                        break;
+                    case 4:
+                        house = "Hufflepuff";
+                        flag = false;
+                        break;
+                    default:
+                        System.out.println("Error: House unavailable, please choose correctly from the options above");
+                        break;
+                }
             }
             sortingQuizCapability = false;
-        }
-        else {
+        } else {
             System.out.println("You have already been sorted!\nYour house: " + house);
         }
     }
