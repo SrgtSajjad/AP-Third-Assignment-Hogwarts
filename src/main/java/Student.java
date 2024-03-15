@@ -27,7 +27,9 @@ public class Student extends Educational {
                     System.out.println("-Account Verified-\nWelcome " + student.getUsername());
                     break;
                 }
-                System.out.println("Error: Authentication failed,Please re-enter your password");
+                else if (Objects.equals(password, "exit"))
+                    break;
+                System.out.println("Error: Authentication failed,Please re-enter your password\n\nType \"exit\" to leave to menu");
 
             }
             return student;
