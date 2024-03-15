@@ -8,9 +8,23 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        createDataBase();
         while (true) {
             runMenu();
         }
+    }
+
+    private static void createDataBase() {
+        Teacher teacher1 = new Teacher("Snape", "1234", "teacher");
+        teacher1.setSignedUp(true);
+        Student student1 = new Student("Harry", "1234", "student");
+        student1.setSignedUp(true);
+        Course course1 = new Course("Magic", null);
+        Course.courses.add(course1);
+        Educational.teachers.add(teacher1);
+        Educational.students.add(student1);
+
+
     }
 
     public static void runMenu() {
@@ -47,10 +61,10 @@ public class Main {
     public static void login() {
         int role;
         while (true) {
-            System.out.println("Your role:\n1. Teacher\n2. Student");
+            System.out.println("Your role:\n0. Exit\n1. Teacher\n2. Student\n3. Assistant");
             Scanner scanner = new Scanner(System.in);
             role = scanner.nextInt();
-            if (role >= 0 && role < 6)
+            if (role >= 0 && role < 5)
                 break;
         }
         if (Objects.equals(role, 0)) {
@@ -63,6 +77,20 @@ public class Main {
                 teacher.menu();
             }
         } else if (Objects.equals(role, 2)) {
+            Student student = Student.login();
+            if (student != null) {
+                if (!student.isSignedUp())
+                    student.signUp();
+                student.menu();
+            }
+        }
+        else if (Objects.equals(role, 3)) {
+            Assistant assistant = Assistant.login();
+            if (assistant != null) {
+                assistant.menu();
+            }
+        }
+        else if (Objects.equals(role, 4)) {
             Student student = Student.login();
             if (student != null) {
                 if (!student.isSignedUp())
