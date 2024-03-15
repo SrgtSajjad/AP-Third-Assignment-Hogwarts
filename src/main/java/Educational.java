@@ -63,5 +63,4 @@ public class Educational extends Account {
     public void setHouse(String house) {
         this.house = house;
     }
-
 }
