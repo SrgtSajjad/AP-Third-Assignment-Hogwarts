@@ -42,7 +42,7 @@ public class Teacher extends Educational {
             }
         }
         int newScore;
-        int index = course.participatingStudents.get(number - 1).coursesTaken.indexOf(course);
+        int index = course.participatingStudents.get(number - 1).getCoursesTaken().indexOf(course);
         System.out.println("Changing score for: " + course.participatingStudents.get(number - 1).getUsername() + "\nScore: " + course.participatingStudents.get(number - 1).scores.get(index) + "/100");
         while (true) {
             newScore = scanner.nextInt();
