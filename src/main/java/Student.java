@@ -3,15 +3,17 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Student extends Educational {
-    ArrayList<Teacher> positiveFeedback = new ArrayList<Teacher>();
-    ArrayList<Teacher> negativeFeedback = new ArrayList<Teacher>();
+    ArrayList<Teacher> positiveFeedback = new ArrayList<>();
+    ArrayList<Teacher> negativeFeedback = new ArrayList<>();
     int score;
 
     public Student(String username, String password, String role) {
         super(username, password, role);
     }
 
-    public static Student login() {
+    public static Student login()
+    {
+        System.out.println("~~| Student Login |~~\n");
         Scanner scanner = new Scanner(System.in);
         Student student = null;
         System.out.print("Username: ");
@@ -44,6 +46,7 @@ public class Student extends Educational {
     }
 
     public void viewTeachersList() {
+        System.out.println("~~| View Teacher's List |~~\n");
         int i = 0;
         for (Course course : getCoursesTaken()) {
             i++;
@@ -53,6 +56,8 @@ public class Student extends Educational {
     }
 
     public void takeCourses() {
+        System.out.println("~~| Take Courses |~~\n");
+
         int i = 0;
         System.out.println("0. Exit");
         for (Course course : Course.courses) {
@@ -63,23 +68,34 @@ public class Student extends Educational {
         while (true) {
             System.out.print("Enter the course you would like to take: ");
             i = scanner.nextInt();
-            if (i - 1 < Course.courses.size() && i - 1 >= 0) {
+            if (Course.courses.get(i - 1).participatingStudents.contains(this)) {
+                System.out.print("You have already taken this course, please try another one");
+            } else if (i - 1 < Course.courses.size() && i - 1 >= 0) {
                 Course course = Course.courses.get(i - 1);
                 getCoursesTaken().add(course);
+                course.participatingStudents.add(this);
                 break;
             } else if (i == 0) {
                 break;
             }
-            System.out.print("Error: Course unavailable, please choose from the list above");
+            else
+                System.out.print("Error: Course unavailable, please choose from the list above");
         }
     }
 
     public void scoreTeachers() {
+        System.out.println("~~| Score Teachers |~~\n");
         viewTeachersList();
         System.out.print("Choose a teacher's number: ");
         Scanner scanner = new Scanner(System.in);
-        int number = scanner.nextInt();
+        int number;
+        while (true) {
+            number = scanner.nextInt();
+            if (number - 1 > 0 && number - 1 < getCoursesTaken().size())
+                break;
+            System.out.print("Error: Teacher not available, please choose from the list above ");
 
+        }
 
         Teacher teacher = getCoursesTaken().get(number - 1).getTeacher();
         boolean flag = true;
@@ -117,8 +133,12 @@ public class Student extends Educational {
     }
 
     public void viewAssignments() {
-        viewCoursesTaken();
-
+        System.out.println("~~| View Assignments |~~\n");
+        int i = 0;
+        for (Course course : getCoursesTaken()) {
+            i++;
+            System.out.println(i + "." + course.getTitle() + " Assignment: " + course.getAssignment());
+        }
     }
 
     public void menu() {
@@ -129,12 +149,13 @@ public class Student extends Educational {
                     "\nUsername: " + getUsername() +
                     "\nHouse: " + getHouse() +
                     "\nScore: " + score +
-                    "\n0. Exit" +
-                    "\n1. Take Sorting quiz" +
+                    "\n1. Change Account Credentials" +
                     "\n2. Take Course" +
                     "\n3. View Teacher's List" +
                     "\n4. Score Teachers" +
-                    "\n5. View Courses Taken");
+                    "\n5. View Courses Taken" +
+                    "\n6. View Assignments" +
+                    "\n0. Exit");
             Scanner scanner = new Scanner(System.in);
             int command;
             System.out.print("Your command: ");
@@ -144,28 +165,34 @@ public class Student extends Educational {
                     flag = false;
                     break;
                 case 1:
-                    takeSortingQuiz();
+                    changeAccountCredentials();
                     break;
                 case 2:
                     takeCourses();
                     break;
                 case 3:
                     if (getCoursesTaken().isEmpty())
-                        System.out.println("You haven't taken any courses, please take a course first before trying to teach");
+                        System.out.println("You haven't taken any courses, please take a course first");
                     else
                         viewTeachersList();
                     break;
                 case 4:
                     if (getCoursesTaken().isEmpty())
-                        System.out.println("You haven't taken any courses, please take a course first before trying to teach");
+                        System.out.println("You haven't taken any courses, please take a course first");
                     else
                         scoreTeachers();
                     break;
                 case 5:
                     if (getCoursesTaken().isEmpty())
-                        System.out.println("You haven't taken any courses, please take a course first before trying to teach");
+                        System.out.println("You haven't taken any courses, please take a course first");
                     else
                         viewCoursesTaken();
+                    break;
+                case 6:
+                    if (getCoursesTaken().isEmpty())
+                        System.out.println("You haven't taken any courses, please take a course first");
+                    else
+                        viewAssignments();
                     break;
                 default:
                     System.out.println("Error: Option is not available, please choose from the list above");
