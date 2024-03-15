@@ -51,6 +51,7 @@ public class Teacher extends Educational {
         }
         Scanner scanner = new Scanner(System.in);
         Course course = null;
+
         while (true) {
             System.out.print("Enter the course you would like to teach: ");
             i = scanner.nextInt();
@@ -68,7 +69,7 @@ public class Teacher extends Educational {
         Scanner microphone = new Scanner(System.in);
         while (true) {
             String lecture = microphone.nextLine();
-            if (lecture == "exit") {
+            if (Objects.equals(lecture, "exit")) {
                 break;
             }
             System.out.println("Course: " + course.getTitle());
@@ -103,7 +104,6 @@ public class Teacher extends Educational {
         }
         System.out.print("Error: Course unavailable, please choose from the list above");
     }
-
 
     public void scoreStudents() {
         Scanner scanner = new Scanner(System.in);
@@ -170,6 +170,9 @@ public class Teacher extends Educational {
                     student.positiveFeedback.remove(this);
                     student.negativeFeedback.remove(this);
                     break;
+                default:
+                    System.out.println("Error: Please choose an option from above");
+                    break;
 
             }
         }
@@ -205,7 +208,6 @@ public class Teacher extends Educational {
         }
 
 
-
     }
 
     public void menu() {
@@ -221,7 +223,8 @@ public class Teacher extends Educational {
                     "\n2. Take Course" +
                     "\n3. View Student's List" +
                     "\n4. Score Students" +
-                    "\n5. View Courses Taken");
+                    "\n5. View Courses Taken" +
+                    "\n6. Teach a Course");
             Scanner scanner = new Scanner(System.in);
             int command;
             System.out.print("Your command: ");
@@ -237,13 +240,28 @@ public class Teacher extends Educational {
                     takeCourses();
                     break;
                 case 3:
-                    viewStudentsList();
+                    if (getCoursesTaken().isEmpty())
+                        System.out.println("You haven't taken any courses, please take a course first before trying to teach");
+                    else
+                        viewStudentsList();
                     break;
                 case 4:
-                    scoreStudents();
+                    if (getCoursesTaken().isEmpty())
+                        System.out.println("You haven't taken any courses, please take a course first before trying to teach");
+                    else
+                        scoreStudents();
                     break;
                 case 5:
-                    viewCoursesTaken();
+                    if (getCoursesTaken().isEmpty())
+                        System.out.println("You haven't taken any courses, please take a course first before trying to teach");
+                    else
+                        viewCoursesTaken();
+                    break;
+                case 6:
+                    if (getCoursesTaken().isEmpty())
+                        System.out.println("You haven't taken any courses, please take a course first before trying to teach");
+                    else
+                        teach();
                     break;
                 default:
                     System.out.println("Error: Option is not available, please choose from the list above");

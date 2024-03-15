@@ -79,6 +79,8 @@ public class Student extends Educational {
         System.out.print("Choose a teacher's number: ");
         Scanner scanner = new Scanner(System.in);
         int number = scanner.nextInt();
+
+
         Teacher teacher = getCoursesTaken().get(number - 1).getTeacher();
         boolean flag = true;
         while (flag) {
@@ -106,10 +108,17 @@ public class Student extends Educational {
                     teacher.positiveFeedback.remove(this);
                     teacher.negativeFeedback.remove(this);
                     break;
-
+                default:
+                    System.out.println("Error: Please choose an option from above");
+                    break;
             }
 
         }
+    }
+
+    public void viewAssignments() {
+        viewCoursesTaken();
+
     }
 
     public void menu() {
@@ -141,13 +150,22 @@ public class Student extends Educational {
                     takeCourses();
                     break;
                 case 3:
-                    viewTeachersList();
+                    if (getCoursesTaken().isEmpty())
+                        System.out.println("You haven't taken any courses, please take a course first before trying to teach");
+                    else
+                        viewTeachersList();
                     break;
                 case 4:
-                    scoreTeachers();
+                    if (getCoursesTaken().isEmpty())
+                        System.out.println("You haven't taken any courses, please take a course first before trying to teach");
+                    else
+                        scoreTeachers();
                     break;
                 case 5:
-                    viewCoursesTaken();
+                    if (getCoursesTaken().isEmpty())
+                        System.out.println("You haven't taken any courses, please take a course first before trying to teach");
+                    else
+                        viewCoursesTaken();
                     break;
                 default:
                     System.out.println("Error: Option is not available, please choose from the list above");
