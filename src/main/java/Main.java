@@ -3,12 +3,59 @@
  */
 
 
+import java.util.Objects;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // TODO: Program starts from here
+        while (true) {
+            runMenu();
+        }
     }
 
     public static void runMenu() {
-        // TODO: Menu will be shown here...
+        System.out.println("1. Login\n2. Sign Up");
+        Scanner scanner = new Scanner(System.in);
+        switch (scanner.nextInt()) {
+            case 1:
+                login();
+                break;
+            case 2:
+                signUp();
+                break;
+        }
+        runMenu();
+    }
+
+    public static void signUp() {
+        System.out.print("Your role: ");
+        Scanner scanner = new Scanner(System.in);
+        String role = scanner.next();
+        if (Objects.equals(role, "teacher")) {
+            System.out.print("Username: ");
+            String username = scanner.next();
+            System.out.print("Password: ");
+            String password = scanner.next();
+            System.out.println("Please wait for an admin to accept your request");
+            //Teacher teacher = new Teacher(username,  password, role);
+            //Educational.teachers.add(teacher);
+            //TODO admin_request
+        }
+
+    }
+
+    public static void login() {
+        System.out.println("Your role:\n1. Teacher\n2. Student");
+        Scanner scanner = new Scanner(System.in);
+        int role = scanner.nextInt();
+        if (Objects.equals(role, 1)) {
+            Teacher teacher = Teacher.login();
+            if (teacher != null)
+                teacher.menu();
+        } else if (Objects.equals(role, 2)) {
+            Student student = Student.login();
+            if (student != null)
+                student.menu();
+        }
     }
 }
