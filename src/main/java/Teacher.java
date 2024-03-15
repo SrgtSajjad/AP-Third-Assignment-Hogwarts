@@ -88,7 +88,10 @@ public class Teacher extends Educational {
         System.out.println("0. Exit");
         for (Course course : Course.courses) {
             i++;
-            System.out.println(i + ". " + course.getTitle() + " Teacher: " + course.getTeacher().getUsername());
+            String teacherName = "-Teacher unavailable-";
+            if (course.getTeacher() != null)
+                teacherName = course.getTeacher().getUsername();
+            System.out.println(i + ". " + course.getTitle() + " Teacher: " + teacherName);
         }
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -105,8 +108,8 @@ public class Teacher extends Educational {
                 break;
             }
 
+            System.out.print("Error: Course unavailable, please choose from the list above");
         }
-        System.out.print("Error: Course unavailable, please choose from the list above");
     }
 
     public void scoreStudents() {
@@ -130,7 +133,7 @@ public class Teacher extends Educational {
             }
         }
         Course course = getCoursesTaken().get(number - 1); // create a reference to the selected course
-        System.out.println("Students participating in " + getCoursesTaken().get(number - 1).getTitle());
+        System.out.println("Students participating in " + getCoursesTaken().get(number - 1).getTitle() + ":");
         i = 0;
         for (Student student : getCoursesTaken().get(number - 1).participatingStudents) { // display students participating in the specific class
             i++;
@@ -151,21 +154,21 @@ public class Teacher extends Educational {
         Student student = course.participatingStudents.get(number - 1);
         boolean flag = true;
         while (flag) {
-            System.out.println(student.getUsername() + "\n0. Cancel\n1. Give positive feedback\n2. Give negative feedback\n 3. retract feedback");
+            System.out.println(student.getUsername() + "\n0. Exit\n1. Give positive feedback\n2. Give negative feedback\n3. retract feedback");
             number = scanner.nextInt();
             switch (number) {
                 case 0:
                     flag = false;
                     break;
                 case 1: // teacher goes to the student's positive feedback's list
-                    if (!student.positiveFeedback.contains(this)) {
+                    if (!(student.positiveFeedback.contains(this) || student.negativeFeedback.contains(this))) {
                         student.positiveFeedback.add(this);
                         System.out.println("Thanks for your feedback");
                     } else
                         System.out.println("You have already gave a feedback for this student, retract first to change it");
                     break;
                 case 2: // teacher goes to the student's negative feedback's list
-                    if (!student.negativeFeedback.contains(this)) {
+                    if (!(student.positiveFeedback.contains(this) || student.negativeFeedback.contains(this))) {
                         student.negativeFeedback.add(this);
                         System.out.println("Thanks for your feedback");
                     } else
@@ -224,11 +227,6 @@ public class Teacher extends Educational {
         int i = 0;
         System.out.println("Choose a course: ");
 
-        for (Course course : getCoursesTaken()) { // display courses taken by teacher
-            i++;
-            System.out.println(i + "." + course.getTitle());
-        }
-
         while (true) { // get number of a course and handle errors
             number = scanner.nextInt();
             if (number - 1 <= getCoursesTaken().size()) {
@@ -239,7 +237,7 @@ public class Teacher extends Educational {
         }
         Course course = getCoursesTaken().get(number - 1);
         System.out.print("Set an assignment for this course: ");
-        String assignment = scanner.next();
+        String assignment = scanner.nextLine();
         course.setAssignment(assignment);
         System.out.print("Assignment set successfully");
 

@@ -62,7 +62,10 @@ public class Student extends Educational {
         System.out.println("0. Exit");
         for (Course course : Course.courses) {
             i++;
-            System.out.println(i + ". " + course.getTitle() + " Teacher: " + course.getTeacher().getUsername());
+            String teacherName = "-Teacher unavailable-";
+            if (course.getTeacher() != null)
+                teacherName = course.getTeacher().getUsername();
+            System.out.println(i + ". " + course.getTitle() + " Teacher: " + teacherName);
         }
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -91,7 +94,7 @@ public class Student extends Educational {
         int number;
         while (true) {
             number = scanner.nextInt();
-            if (number - 1 > 0 && number - 1 < getCoursesTaken().size())
+            if (number - 1 >= 0 && number - 1 < getCoursesTaken().size())
                 break;
             System.out.print("Error: Teacher not available, please choose from the list above ");
 
@@ -100,21 +103,21 @@ public class Student extends Educational {
         Teacher teacher = getCoursesTaken().get(number - 1).getTeacher();
         boolean flag = true;
         while (flag) {
-            System.out.println(teacher.getUsername() + "\n0. Cancel\n1. Give positive feedback\n2. Give negative feedback\n 3. retract feedback");
+            System.out.println(teacher.getUsername() + "\n0. Exit\n1. Give positive feedback\n2. Give negative feedback\n3. retract feedback");
             number = scanner.nextInt();
             switch (number) {
                 case 0:
                     flag = false;
                     break;
                 case 1:
-                    if (!teacher.positiveFeedback.contains(this)) {
+                    if (!(teacher.positiveFeedback.contains(this) || teacher.negativeFeedback.contains(this))) {
                         teacher.positiveFeedback.add(this);
                         System.out.println("Thanks for your feedback");
                     } else
                         System.out.println("You have already gave a feedback for this teacher, retract first to change it");
                     break;
                 case 2:
-                    if (!teacher.negativeFeedback.contains(this)) {
+                    if (!(teacher.positiveFeedback.contains(this) || teacher.negativeFeedback.contains(this))) {
                         teacher.negativeFeedback.add(this);
                         System.out.println("Thanks for your feedback");
                     } else
