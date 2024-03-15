@@ -43,10 +43,12 @@ public class Educational extends Account {
                     flag = false;
                     break;
                 case 1:
+                    System.out.print("New Username: ");
                     changeUsername(scanner.next());
                     flag = false;
                     break;
                 case 2:
+                    System.out.print("New Password: ");
                     changePassword(scanner.next());
                     flag = false;
                     break;
