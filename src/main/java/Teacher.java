@@ -105,11 +105,36 @@ public class Teacher extends Educational {
     }
 
 
-    public void scoreStudents(Course course) {
-        System.out.println("Choose a student from the list above: ");
+    public void scoreStudents() {
         Scanner scanner = new Scanner(System.in);
         int number;
-        while (true) {
+        int i = 0;
+        System.out.println("Choose a course: ");
+
+        for (Course course : getCoursesTaken()) { // display courses taken by teacher
+            i++;
+            System.out.println(i + "." + course.getTitle());
+        }
+
+        while (true) { // get number of a course and handle errors
+            number = scanner.nextInt();
+            if (number - 1 <= getCoursesTaken().size()) {
+                break;
+            } else {
+                System.out.println("Error: Course unavailable, please select a number from above");
+            }
+        }
+        Course course = getCoursesTaken().get(number - 1); // create a reference to the selected course
+        System.out.println("Students participating in " + getCoursesTaken().get(number - 1).getTitle());
+        i = 0;
+        for (Student student : getCoursesTaken().get(number - 1).participatingStudents) { // display students participating in the specific class
+            i++;
+            System.out.println(i + "." + student.getUsername());
+        }
+
+
+        System.out.println("Choose a student from the list above: ");
+        while (true) { // get number of student in the participating student's list and handle errors
             number = scanner.nextInt();
             if (number - 1 <= course.participatingStudents.size()) {
                 break;
@@ -127,21 +152,21 @@ public class Teacher extends Educational {
                 case 0:
                     flag = false;
                     break;
-                case 1:
+                case 1: // teacher goes to the student's positive feedback's list
                     if (!student.positiveFeedback.contains(this)) {
                         student.positiveFeedback.add(this);
                         System.out.println("Thanks for your feedback");
                     } else
                         System.out.println("You have already gave a feedback for this student, retract first to change it");
                     break;
-                case 2:
+                case 2: // teacher goes to the student's negative feedback's list
                     if (!student.negativeFeedback.contains(this)) {
                         student.negativeFeedback.add(this);
                         System.out.println("Thanks for your feedback");
                     } else
                         System.out.println("You have already gave a feedback for this student, retract first to change it");
                     break;
-                case 3:
+                case 3: // teacher retracts their feedback and get removed from any feedback list
                     student.positiveFeedback.remove(this);
                     student.negativeFeedback.remove(this);
                     break;
@@ -179,15 +204,51 @@ public class Teacher extends Educational {
             System.out.println(i + "." + student.getUsername());
         }
 
-        System.out.println("Type \"score\" to enter scoring menu");
-        if (Objects.equals(scanner.next(), "score")) {
-            scoreStudents(getCoursesTaken().get(number - 1));
-        }
 
 
     }
 
     public void menu() {
+        boolean flag = true;
+        while (flag) {
+            score = positiveFeedback.size() - negativeFeedback.size();
+            System.out.println("~~| Student Menu |~~\n" +
+                    "\nUsername: " + getUsername() +
+                    "\nHouse: " + getHouse() +
+                    "\nScore: " + score +
+                    "\n0. Exit" +
+                    "\n1. Take Sorting quiz" +
+                    "\n2. Take Course" +
+                    "\n3. View Student's List" +
+                    "\n4. Score Students" +
+                    "\n5. View Courses Taken");
+            Scanner scanner = new Scanner(System.in);
+            int command;
+            System.out.print("Your command: ");
+            command = scanner.nextInt();
+            switch (command) {
+                case 0:
+                    flag = false;
+                    break;
+                case 1:
+                    takeSortingQuiz();
+                    break;
+                case 2:
+                    takeCourses();
+                    break;
+                case 3:
+                    viewStudentsList();
+                    break;
+                case 4:
+                    scoreStudents();
+                    break;
+                case 5:
+                    viewCoursesTaken();
+                    break;
+                default:
+                    System.out.println("Error: Option is not available, please choose from the list above");
+            }
+        }
     }
 }
 
