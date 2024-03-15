@@ -57,12 +57,18 @@ public class Main {
             // do nothing to return to main menu
         } else if (Objects.equals(role, 1)) {
             Teacher teacher = Teacher.login();
-            if (teacher != null)
+            if (teacher != null) {
+                if (!teacher.isSignedUp())
+                    teacher.signUp();
                 teacher.menu();
+            }
         } else if (Objects.equals(role, 2)) {
             Student student = Student.login();
-            if (student != null)
+            if (student != null) {
+                if (!student.isSignedUp())
+                    student.signUp();
                 student.menu();
+            }
         }
     }
 }
