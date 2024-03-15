@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Teacher extends Educational {
@@ -5,6 +6,37 @@ public class Teacher extends Educational {
 
     public Teacher(String username, String password, String role) {
         super(username, password, role);
+    }
+
+    public static Teacher login() {
+        Scanner scanner = new Scanner(System.in);
+        Teacher teacher = null;
+        System.out.print("Username: ");
+        String username = scanner.next();
+        for (Teacher teacher1 : Educational.teachers) {
+            if (Objects.equals(teacher1.getUsername(), username)) {
+                teacher = teacher1;
+                break;
+            }
+        }
+        if (teacher != null) {
+            while (true) {
+                System.out.print("Password: ");
+                String password = scanner.next();
+                if (teacher.validatePassword(password)) {
+                    System.out.println("-Account Verified-\nWelcome " + teacher.getUsername());
+                    break;
+                }
+                System.out.println("Error: Authentication failed,Please re-enter your password");
+
+            }
+            return teacher;
+        }
+        else {
+            System.out.println("Error: User not available, please try again");
+        }
+        System.out.println("Error: Login failed");
+        return null;
     }
 
     public void viewCoursesTaken() {
@@ -91,5 +123,7 @@ public class Teacher extends Educational {
 
     }
 
+    public void menu() {
+    }
 }
 
