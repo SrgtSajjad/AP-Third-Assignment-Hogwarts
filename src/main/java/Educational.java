@@ -23,7 +23,7 @@ public class Educational extends Account {
         int i = 0;
         for (Course course : getCoursesTaken()) {
             i++;
-            System.out.println(i + "." + course.title);
+            System.out.println(i + "." + course.getTitle());
         }
     }
 

@@ -47,7 +47,7 @@ public class Student extends Educational {
         int i = 0;
         for (Course course : getCoursesTaken()) {
             i++;
-            System.out.println(i + "." + course.teacher.getUsername() + " teacher of " + course.title);
+            System.out.println(i + "." + course.getTeacher().getUsername() + " teacher of " + course.getTitle());
         }
 
     }
@@ -57,7 +57,7 @@ public class Student extends Educational {
         System.out.println("0. Exit");
         for (Course course : Course.courses) {
             i++;
-            System.out.println(i + ". " + course.title + " Teacher: " + course.teacher.getUsername());
+            System.out.println(i + ". " + course.getTitle() + " Teacher: " + course.getTeacher().getUsername());
         }
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -80,7 +80,7 @@ public class Student extends Educational {
         System.out.print("Choose a teacher's number: ");
         Scanner scanner = new Scanner(System.in);
         int number = scanner.nextInt();
-        Teacher teacher = getCoursesTaken().get(number - 1).teacher;
+        Teacher teacher = getCoursesTaken().get(number - 1).getTeacher();
         boolean flag = true;
         while (flag) {
             System.out.println(teacher.getUsername() + "\n0. Cancel\n1. Give positive feedback\n2. Give negative feedback\n 3. retract feedback");
