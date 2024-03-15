@@ -1,6 +1,28 @@
+import java.util.Objects;
+import java.util.Scanner;
+
 public class Hogwarts extends Account {
-    public Hogwarts(String username, String password, String role) {
-        super(username, password, role);
+    public Hogwarts() {
+        super("Dumbledore", "VoldemortShouldDie", "Hogwarts");
+    }
+
+    public static Hogwarts login() {
+        System.out.println("~~| Hogwarts Login |~~\n");
+        Scanner scanner = new Scanner(System.in);
+        Hogwarts hogwarts = new Hogwarts();
+        System.out.print("Username: ");
+        String username = scanner.next();
+        while (true) {
+            System.out.print("Password: ");
+            String password = scanner.next();
+            if (hogwarts.validatePassword(password)) {
+                System.out.println("-Account Verified-\nWelcome " + hogwarts.getUsername());
+                break;
+            } else if (Objects.equals(password, "exit"))
+                return null;
+            System.out.println("Error: Authentication failed,Please re-enter your password\n\nType \"exit\" to leave to menu");
+        }
+        return hogwarts;
     }
 
     // TODO: Define Attributes
@@ -29,5 +51,8 @@ public class Hogwarts extends Account {
             i++;
             System.out.println(i + ". " + course.getTitle());
         }
+    }
+
+    public void menu() {
     }
 }
