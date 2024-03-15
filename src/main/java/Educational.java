@@ -16,11 +16,27 @@ public class Educational extends Account {
     }
 
     public void signUp() {
-
+        if (!isSignedUp()) {
+            System.out.println("~~| Sign Up |~~\n");
+            takeSortingQuiz();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Your full name: ");
+            setFullName(scanner.nextLine());
+            System.out.print("Your age: ");
+            setAge(scanner.nextInt());
+            System.out.print("Your speciality: ");
+            setSpeciality(scanner.next());
+            setSignedUp(true);
+            System.out.println("-Sign Up Completed-");
+        }
+        else {
+            System.out.println("You have already completed Sign Up");
+        }
     }
 
 
     public void viewCoursesTaken() {
+        System.out.println("~~| View Courses Taken |~~\n");
         int i = 0;
         for (Course course : getCoursesTaken()) {
             i++;
@@ -29,6 +45,7 @@ public class Educational extends Account {
     }
 
     public void takeSortingQuiz() {
+        System.out.println("~~| Sorting Quiz |~~\n");
         if (sortingQuizCapability) {
             System.out.println("Which house would you fit in best?");
             Scanner scanner = new Scanner(System.in);

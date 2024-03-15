@@ -1,35 +1,65 @@
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class Account implements AccountManagement {
     private String username;
     private String password;
     private String role;
-    private boolean approved;
     private UUID accountID;
+    private String fullName;
+    private int age;
+    private String speciality;
+    private boolean signedUp;
 
     public Account(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
         accountID = UUID.randomUUID();
+        signedUp = false;
     }
 
     public String getRole() {
         return role;
     }
 
-    public boolean isApproved() {
-        return approved;
-    }
-
-    public void setApproved(boolean approved) {
-        this.approved = approved;
-    }
-
-
     public UUID getAccountID() {
         return accountID;
+    }
+
+
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+
+    public boolean isSignedUp() {
+        return signedUp;
+    }
+
+    public void setSignedUp(boolean signedUp) {
+        this.signedUp = signedUp;
     }
 
     @Override
