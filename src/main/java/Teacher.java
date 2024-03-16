@@ -68,6 +68,7 @@ public class Teacher extends Educational {
 
         }
 
+        if (course != null) {
 
         Scanner microphone = new Scanner(System.in);
         while (true) {
@@ -80,6 +81,7 @@ public class Teacher extends Educational {
             System.out.println("Lecture: " + lecture);
         }
         System.out.println("Lecture has ended.");
+        }
     }
 
     public void takeCourses() {
@@ -261,10 +263,10 @@ public class Teacher extends Educational {
         Student student = course.participatingStudents.get(number - 1);
         boolean hasCommented = false;
         int commentIndex = 0;
-        for (Comment comment : student.comments) {
+        for (Comment comment : student.getComments()) {
             if (comment.commentor == this) {
                 hasCommented = true;
-                commentIndex = student.comments.indexOf(comment);
+                commentIndex = student.getComments().indexOf(comment);
                 break;
             }
         }
@@ -272,7 +274,7 @@ public class Teacher extends Educational {
         while (flag) {
             System.out.println(student.getUsername() + ":\n0. Exit\n1. Set/Edit comment\n2. Delete comment");
             if (hasCommented)
-                System.out.println("Your current comment: \"" + student.comments.get(commentIndex).comment + "\"");
+                System.out.println("Your current comment: \"" + student.getComments().get(commentIndex).comment + "\"");
             number = scanner.nextInt();
             switch (number) {
                 case 0:
@@ -280,13 +282,13 @@ public class Teacher extends Educational {
                     break;
                 case 1:
                     if (hasCommented)
-                        student.comments.remove(commentIndex);
+                        student.getComments().remove(commentIndex);
                     System.out.print("Your comment: ");
-                    student.comments.add(new Comment(scanner.nextLine(), this));
+                    student.getComments().add(new Comment(scanner.nextLine(), this));
                     break;
                 case 2:
                     if (hasCommented) {
-                        student.comments.remove(commentIndex);
+                        student.getComments().remove(commentIndex);
                         System.out.println("Comment removed Successfully");
                     } else
                         System.out.println("You have no comments to delete");
@@ -304,7 +306,6 @@ public class Teacher extends Educational {
         viewCoursesTaken();
         Scanner scanner = new Scanner(System.in);
         int number;
-        int i = 0;
         System.out.println("Choose a course: ");
 
         while (true) { // get number of a course and handle errors
