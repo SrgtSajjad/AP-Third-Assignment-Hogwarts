@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Teacher extends Educational {
     ArrayList<Student> positiveFeedback = new ArrayList<>();
     ArrayList<Student> negativeFeedback = new ArrayList<>();
+    ArrayList<Comment> comments = new ArrayList<>();
     int score;
 
     public Teacher(String username, String password, String role) {
@@ -217,6 +218,85 @@ public class Teacher extends Educational {
         }
 
 
+    }
+
+    public void commentStudent() {
+        System.out.println("~~| Comment Students |~~\n");
+        Scanner scanner = new Scanner(System.in);
+        int number;
+        int i = 0;
+        System.out.println("Choose a course: ");
+
+        for (Course course : getCoursesTaken()) { // display courses taken by teacher
+            i++;
+            System.out.println(i + "." + course.getTitle());
+        }
+
+        while (true) { // get number of a course and handle errors
+            number = scanner.nextInt();
+            if (number - 1 <= getCoursesTaken().size()) {
+                break;
+            } else {
+                System.out.println("Error: Course unavailable, please select a number from above");
+            }
+        }
+        Course course = getCoursesTaken().get(number - 1); // create a reference to the selected course
+        System.out.println("Students participating in " + getCoursesTaken().get(number - 1).getTitle() + ":");
+        i = 0;
+        for (Student student : getCoursesTaken().get(number - 1).participatingStudents) { // display students participating in the specific class
+            i++;
+            System.out.println(i + "." + student.getUsername());
+        }
+
+
+        System.out.println("Choose a student from the list above: ");
+        while (true) { // get number of student in the participating student's list and handle errors
+            number = scanner.nextInt();
+            if (number - 1 <= course.participatingStudents.size()) {
+                break;
+            } else {
+                System.out.println("Error: Student unavailable, please select a number from above");
+            }
+        }
+
+        Student student = course.participatingStudents.get(number - 1);
+        boolean hasCommented = false;
+        int commentIndex = 0;
+        for (Comment comment : student.comments) {
+            if (comment.commentor == this) {
+                hasCommented = true;
+                commentIndex = student.comments.indexOf(comment);
+                break;
+            }
+        }
+        boolean flag = true;
+        while (flag) {
+            System.out.println(student.getUsername() + "\n0. Exit\n1. Set/Edit comment\n2. Delete comment");
+            if (hasCommented)
+                System.out.println("Your current comment: \"" + student.comments.get(commentIndex).comment + "\"");
+            number = scanner.nextInt();
+            switch (number) {
+                case 0:
+                    flag = false;
+                    break;
+                case 1:
+                    System.out.print("Your comment: ");
+                    student.comments.add(new Comment(scanner.nextLine(), this));
+                    break;
+                case 2:
+                    if (hasCommented) {
+                        student.comments.remove(commentIndex);
+                        System.out.println("Comment removed Successfully");
+                    }
+                    else
+                        System.out.println("You have no comments to delete");
+                    break;
+                default:
+                    System.out.println("Error: Please choose an option from above");
+                    break;
+
+            }
+        }
     }
 
     public void setAssignments() {

@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Student extends Educational {
     ArrayList<Teacher> positiveFeedback = new ArrayList<>();
     ArrayList<Teacher> negativeFeedback = new ArrayList<>();
+    ArrayList<Comment> comments = new ArrayList<>();
+
     int score;
 
     public Student(String username, String password, String role) {
