@@ -59,7 +59,7 @@ public class Student extends Educational {
 
         int i = 0;
         System.out.println("0. Exit");
-        for (Course course : Course.courses) {
+        for (Course course : Course.getCourses()) {
             i++;
             String teacherName = "-Teacher unavailable-";
             if (course.getTeacher() != null)
@@ -70,10 +70,10 @@ public class Student extends Educational {
         while (true) {
             System.out.print("Enter the course you would like to take: ");
             i = scanner.nextInt();
-            if (Course.courses.get(i - 1).participatingStudents.contains(this)) {
+            if (Course.getCourses().get(i - 1).participatingStudents.contains(this)) {
                 System.out.print("You have already taken this course, please try another one");
-            } else if (i - 1 < Course.courses.size() && i - 1 >= 0) {
-                Course course = Course.courses.get(i - 1);
+            } else if (i - 1 < Course.getCourses().size() && i - 1 >= 0) {
+                Course course = Course.getCourses().get(i - 1);
                 getCoursesTaken().add(course);
                 course.participatingStudents.add(this);
                 break;

@@ -60,8 +60,8 @@ public class Teacher extends Educational {
             i = scanner.nextInt();
             if (i == 0) {
                 break;
-            } else if (i - 1 < Course.courses.size() && i - 1 >= 0) {
-                course = Course.courses.get(i - 1);
+            } else if (i - 1 < Course.getCourses().size() && i - 1 >= 0) {
+                course = Course.getCourses().get(i - 1);
                 break;
             }
             System.out.print("Error: Course unavailable, please choose from the list above");
@@ -88,7 +88,7 @@ public class Teacher extends Educational {
         System.out.println("~~| Take Courses |~~\n");
         int i = 0;
         System.out.println("0. Exit");
-        for (Course course : Course.courses) {
+        for (Course course : Course.getCourses()) {
             i++;
             String teacherName = "-Teacher unavailable-";
             if (course.getTeacher() != null)
@@ -101,10 +101,10 @@ public class Teacher extends Educational {
             i = scanner.nextInt();
             if (i == 0) {
                 break;
-            } else if (Course.courses.get(i - 1).getTeacher() != null) {
+            } else if (Course.getCourses().get(i - 1).getTeacher() != null) {
                 System.out.print("This course already has a teacher, please choose another one");
-            } else if (i - 1 < Course.courses.size() && i - 1 >= 0) {
-                Course course = Course.courses.get(i - 1);
+            } else if (i - 1 < Course.getCourses().size() && i - 1 >= 0) {
+                Course course = Course.getCourses().get(i - 1);
                 course.setTeacher(this);
                 getCoursesTaken().add(course);
                 break;

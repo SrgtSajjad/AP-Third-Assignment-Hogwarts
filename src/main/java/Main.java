@@ -20,7 +20,7 @@ public class Main {
         Student student1 = new Student("Harry", "1234", "student");
         student1.setSignedUp(true);
         Course course1 = new Course("Magic", null);
-        Course.courses.add(course1);
+        Course.getCourses().add(course1);
         Educational.getTeachers().add(teacher1);
         Educational.getStudents().add(student1);
 
