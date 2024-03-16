@@ -18,7 +18,7 @@ public class Teacher extends Educational {
         Teacher teacher = null;
         System.out.print("Username: ");
         String username = scanner.next();
-        for (Teacher teacher1 : Educational.teachers) {
+        for (Teacher teacher1 : Educational.getTeachers()) {
             if (Objects.equals(teacher1.getUsername(), username)) {
                 teacher = teacher1;
                 break;

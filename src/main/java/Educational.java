@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class Educational extends Account {
 
-    static ArrayList<Teacher> teachers = new ArrayList<>();
-    static ArrayList<Student> students = new ArrayList<>();
-    ArrayList<Comment> comments = new ArrayList<>();
+    private static ArrayList<Teacher> teachers = new ArrayList<>();
+    private static ArrayList<Student> students = new ArrayList<>();
+    private ArrayList<Comment> comments = new ArrayList<>();
 
     private ArrayList<Course> coursesTaken = new ArrayList<>();
 
@@ -80,7 +80,7 @@ public class Educational extends Account {
         }
     }
 
-    public void takeSortingQuiz() {
+    private void takeSortingQuiz() {
         System.out.println("~~| Sorting Quiz |~~\n");
         if (sortingQuizCapability) {
             System.out.println("Which house would you fit in best?");
@@ -127,6 +127,10 @@ public class Educational extends Account {
 
     public ArrayList<Course> getCoursesTaken() {
         return coursesTaken;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
     }
 
     public String getHouse() {

@@ -21,8 +21,8 @@ public class Main {
         student1.setSignedUp(true);
         Course course1 = new Course("Magic", null);
         Course.courses.add(course1);
-        Educational.teachers.add(teacher1);
-        Educational.students.add(student1);
+        Educational.getTeachers().add(teacher1);
+        Educational.getStudents().add(student1);
 
 
     }
@@ -52,7 +52,7 @@ public class Main {
             String password = scanner.next();
             System.out.println("Please wait for an admin to accept your request");
             Teacher teacher = new Teacher(username, password, role);
-            Educational.teachers.add(teacher);
+            Educational.getTeachers().add(teacher);
             //TODO admin_request
         }
 

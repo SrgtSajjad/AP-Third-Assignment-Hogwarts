@@ -17,7 +17,7 @@ public class Student extends Educational {
         Student student = null;
         System.out.print("Username: ");
         String username = scanner.next();
-        for (Student student1 : Educational.students) {
+        for (Student student1 : Educational.getStudents()) {
             if (Objects.equals(student1.getUsername(), username)) {
                 student = student1;
                 break;
@@ -159,10 +159,10 @@ public class Student extends Educational {
         Teacher teacher = getCoursesTaken().get(number - 1).getTeacher();
         boolean hasCommented = false;
         int commentIndex = 0;
-        for (Comment comment : teacher.comments) {
+        for (Comment comment : teacher.getComments()) {
             if (comment.commentor == this) {
                 hasCommented = true;
-                commentIndex = teacher.comments.indexOf(comment);
+                commentIndex = teacher.getComments().indexOf(comment);
                 break;
             }
         }
@@ -170,7 +170,7 @@ public class Student extends Educational {
         while (flag) {
             System.out.println(teacher.getUsername() + ":\n0. Exit\n1. Set/Edit comment\n2. Delete comment");
             if (hasCommented)
-                System.out.println("Your current comment: \"" + teacher.comments.get(commentIndex).comment + "\"");
+                System.out.println("Your current comment: \"" + teacher.getComments().get(commentIndex).comment + "\"");
             number = scanner.nextInt();
             switch (number) {
                 case 0:
@@ -178,13 +178,13 @@ public class Student extends Educational {
                     break;
                 case 1:
                     if (hasCommented)
-                        teacher.comments.remove(commentIndex);
+                        teacher.getComments().remove(commentIndex);
                     System.out.print("Your comment: ");
-                    teacher.comments.add(new Comment(scanner.nextLine(), this));
+                    teacher.getComments().add(new Comment(scanner.nextLine(), this));
                     break;
                 case 2:
                     if (hasCommented) {
-                        teacher.comments.remove(commentIndex);
+                        teacher.getComments().remove(commentIndex);
                         System.out.println("Comment removed Successfully");
                     } else
                         System.out.println("You have no comments to delete");
