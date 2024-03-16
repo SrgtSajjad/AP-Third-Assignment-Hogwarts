@@ -1,5 +1,6 @@
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.UUID;
 
 public class Account implements AccountManagement {
@@ -14,7 +15,7 @@ public class Account implements AccountManagement {
 
     public Account(String username, String password, String role) {
         this.username = username;
-        this.password = password;
+        this.password = DigestUtils.sha256Hex(password);
         this.role = role;
         accountID = UUID.randomUUID();
         signedUp = false;
@@ -27,8 +28,6 @@ public class Account implements AccountManagement {
     public UUID getAccountID() {
         return accountID;
     }
-
-
 
     public String getFullName() {
         return fullName;
@@ -54,8 +53,8 @@ public class Account implements AccountManagement {
         this.speciality = speciality;
     }
 
-    public boolean isSignedUp() {
-        return signedUp;
+    public boolean isNotSignedUp() {
+        return !signedUp;
     }
 
     public void setSignedUp(boolean signedUp) {
@@ -64,7 +63,7 @@ public class Account implements AccountManagement {
 
     @Override
     public boolean validatePassword(String enteredPassword) {
-        if (Objects.equals(this.password, enteredPassword))
+        if (Objects.equals(this.password, DigestUtils.sha256Hex(enteredPassword)))
             return true;
         return false;
     }

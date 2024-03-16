@@ -72,14 +72,14 @@ public class Main {
         } else if (Objects.equals(role, 1)) {
             Teacher teacher = Teacher.login();
             if (teacher != null) {
-                if (!teacher.isSignedUp())
+                if (teacher.isNotSignedUp())
                     teacher.signUp();
                 teacher.menu();
             }
         } else if (Objects.equals(role, 2)) {
             Student student = Student.login();
             if (student != null) {
-                if (!student.isSignedUp())
+                if (student.isNotSignedUp())
                     student.signUp();
                 student.menu();
             }

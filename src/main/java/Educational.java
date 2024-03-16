@@ -18,7 +18,7 @@ public class Educational extends Account {
     }
 
     public void signUp() {
-        if (!isSignedUp()) {
+        if (isNotSignedUp()) {
             System.out.println("~~| Sign Up |~~\n");
             takeSortingQuiz();
             Scanner scanner = new Scanner(System.in);
