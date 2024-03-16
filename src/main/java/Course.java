@@ -6,8 +6,10 @@ public class Course {
     private Teacher teacher;
     UUID courseID;
     private String assignment;
-    static ArrayList<Course> courses = new ArrayList<Course>();
-    ArrayList<Student> participatingStudents = new ArrayList<Student>();
+    static ArrayList<Course> courses = new ArrayList<>();
+    ArrayList<Student> participatingStudents = new ArrayList<>();
+    ArrayList<String> comments = new ArrayList<>();
+
 
     public Course(String title, Teacher teacher) {
         this.title = title;
