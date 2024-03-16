@@ -40,6 +40,31 @@ public class Assistant extends Account{
         return null;
     }
 
+    public void createCourse() {
+        System.out.println("~~| Course Creation |~~\n");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Title of course: ");
+        String title = scanner.nextLine();
+        System.out.println("Confirm creation of the course: " + title + "?\n1. Yes\n2.No");
+        boolean flag = true;
+        int confirmation = scanner.nextInt();
+        while (flag) {
+            switch (confirmation) {
+                case 1:
+                    Course course = new Course(title, null);
+                    Course.getCourses().add(course);
+                    flag = false;
+                    break;
+                case 2:
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Error: Please choose one of the options above");
+                    break;
+            }
+        }
+
+    }
     public void menu() {
     }
 }
