@@ -6,7 +6,7 @@ public class Course {
     private Teacher teacher;
     UUID courseID;
     private String assignment;
-    static ArrayList<Course> courses = new ArrayList<>();
+    private static ArrayList<Course> courses = new ArrayList<>();
     ArrayList<Student> participatingStudents = new ArrayList<>();
 
 
@@ -29,8 +29,8 @@ public class Course {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public static ArrayList<Course> getCourses() {
+        return courses;
     }
 
     public Teacher getTeacher() {
