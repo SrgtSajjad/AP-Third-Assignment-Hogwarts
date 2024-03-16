@@ -8,7 +8,7 @@ public class Course {
     private String assignment;
     static ArrayList<Course> courses = new ArrayList<>();
     ArrayList<Student> participatingStudents = new ArrayList<>();
-    ArrayList<String> comments = new ArrayList<>();
+    ArrayList<Comment> comments = new ArrayList<>();
 
 
     public Course(String title, Teacher teacher) {
