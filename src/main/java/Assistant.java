@@ -69,6 +69,7 @@ public class Assistant extends Account {
     }
 
     public void removeTeacher() {
+        System.out.println("~~| Remove Teacher |~~\n");
         int i = 0;
         Teacher selectedTeacher = null;
         System.out.println("0. Exit");
@@ -81,13 +82,11 @@ public class Assistant extends Account {
             i = scanner.nextInt();
             if (i == 0) {
                 break;
-            }
-            else if (i-1 > 0 && i-1 < Educational.getTeachers().size()) {
-                selectedTeacher = Educational.getTeachers().get(i-1);
+            } else if (i - 1 > 0 && i - 1 < Educational.getTeachers().size()) {
+                selectedTeacher = Educational.getTeachers().get(i - 1);
                 break;
 
-            }
-            else
+            } else
                 System.out.println("Error: Teacher unavailable, please choose from the list above");
         }
 
@@ -104,6 +103,54 @@ public class Assistant extends Account {
                         }
                         flag = false;
                         System.out.println("Teacher removed successfully");
+                        break;
+                    case 2:
+                        flag = false;
+                        break;
+                    default:
+                        System.out.println("Error: Please choose one of the options above");
+                        break;
+                }
+            }
+        }
+
+    }
+
+    public void removeStudent() {
+        System.out.println("~~| Remove Student |~~\n");
+        int i = 0;
+        Student selectedStudent = null;
+        System.out.println("0. Exit");
+        for (Student student : Educational.getStudents()) {
+            i++;
+            System.out.println(i + ". " + student.getFullName());
+        }
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            i = scanner.nextInt();
+            if (i == 0) {
+                break;
+            } else if (i - 1 > 0 && i - 1 < Educational.getStudents().size()) {
+                selectedStudent = Educational.getStudents().get(i - 1);
+                break;
+
+            } else
+                System.out.println("Error: Student unavailable, please choose from the list above");
+        }
+
+        if (selectedStudent != null) {
+            System.out.println("Confirm remove of the teacher: " + selectedStudent.getUsername() + "?\n1. Yes\n2.No");
+            boolean flag = true;
+            int confirmation = scanner.nextInt();
+            while (flag) {
+                switch (confirmation) {
+                    case 1:
+                        Educational.getStudents().remove(selectedStudent);
+                        for (Course course : selectedStudent.getCoursesTaken()) {
+                            course.participatingStudents.remove(selectedStudent);
+                        }
+                        flag = false;
+                        System.out.println("Student removed successfully");
                         break;
                     case 2:
                         flag = false;
