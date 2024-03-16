@@ -5,16 +5,13 @@ import java.util.Scanner;
 public class Student extends Educational {
     ArrayList<Teacher> positiveFeedback = new ArrayList<>();
     ArrayList<Teacher> negativeFeedback = new ArrayList<>();
-    ArrayList<Comment> comments = new ArrayList<>();
-
     int score;
 
     public Student(String username, String password, String role) {
         super(username, password, role);
     }
 
-    public static Student login()
-    {
+    public static Student login() {
         System.out.println("~~| Student Login |~~\n");
         Scanner scanner = new Scanner(System.in);
         Student student = null;
@@ -48,7 +45,7 @@ public class Student extends Educational {
     }
 
     public void viewTeachersList() {
-        System.out.println("~~| View Teacher's List |~~\n");
+        System.out.println("~~| Teacher's List |~~\n");
         int i = 0;
         for (Course course : getCoursesTaken()) {
             i++;
@@ -82,8 +79,7 @@ public class Student extends Educational {
                 break;
             } else if (i == 0) {
                 break;
-            }
-            else
+            } else
                 System.out.print("Error: Course unavailable, please choose from the list above");
         }
     }
@@ -105,7 +101,7 @@ public class Student extends Educational {
         Teacher teacher = getCoursesTaken().get(number - 1).getTeacher();
         boolean flag = true;
         while (flag) {
-            System.out.println(teacher.getUsername() + "\n0. Exit\n1. Give positive feedback\n2. Give negative feedback\n3. retract feedback");
+            System.out.println(teacher.getUsername() + ":\n0. Exit\n1. Give positive feedback\n2. Give negative feedback\n3. retract feedback");
             number = scanner.nextInt();
             switch (number) {
                 case 0:
@@ -146,6 +142,62 @@ public class Student extends Educational {
         }
     }
 
+    public void commentTeachers() {
+        System.out.println("~~| Comment Teachers |~~\n");
+        viewTeachersList();
+        System.out.print("Choose a teacher's number: ");
+        Scanner scanner = new Scanner(System.in);
+        int number;
+        while (true) {
+            number = scanner.nextInt();
+            if (number - 1 >= 0 && number - 1 < getCoursesTaken().size())
+                break;
+            System.out.print("Error: Teacher not available, please choose from the list above ");
+
+        }
+
+        Teacher teacher = getCoursesTaken().get(number - 1).getTeacher();
+        boolean hasCommented = false;
+        int commentIndex = 0;
+        for (Comment comment : teacher.comments) {
+            if (comment.commentor == this) {
+                hasCommented = true;
+                commentIndex = teacher.comments.indexOf(comment);
+                break;
+            }
+        }
+        boolean flag = true;
+        while (flag) {
+            System.out.println(teacher.getUsername() + ":\n0. Exit\n1. Set/Edit comment\n2. Delete comment");
+            if (hasCommented)
+                System.out.println("Your current comment: \"" + teacher.comments.get(commentIndex).comment + "\"");
+            number = scanner.nextInt();
+            switch (number) {
+                case 0:
+                    flag = false;
+                    break;
+                case 1:
+                    if (hasCommented)
+                        teacher.comments.remove(commentIndex);
+                    System.out.print("Your comment: ");
+                    teacher.comments.add(new Comment(scanner.nextLine(), this));
+                    break;
+                case 2:
+                    if (hasCommented) {
+                        teacher.comments.remove(commentIndex);
+                        System.out.println("Comment removed Successfully");
+                    } else
+                        System.out.println("You have no comments to delete");
+                    break;
+                default:
+                    System.out.println("Error: Please choose an option from above");
+                    break;
+
+            }
+
+        }
+    }
+
     public void menu() {
         boolean flag = true;
         while (flag) {
@@ -160,11 +212,17 @@ public class Student extends Educational {
                     "\n4. Score Teachers" +
                     "\n5. View Courses Taken" +
                     "\n6. View Assignments" +
+                    "\n7. Comment Teachers" +
+                    "\n8. View Comments" +
                     "\n0. Exit");
             Scanner scanner = new Scanner(System.in);
             int command;
             System.out.print("Your command: ");
             command = scanner.nextInt();
+            if (command > 2 && command < 9 && getCoursesTaken().isEmpty()) {
+                System.out.println("You haven't taken any courses, please take a course first");
+                continue;
+            }
             switch (command) {
                 case 0:
                     flag = false;
@@ -176,28 +234,22 @@ public class Student extends Educational {
                     takeCourses();
                     break;
                 case 3:
-                    if (getCoursesTaken().isEmpty())
-                        System.out.println("You haven't taken any courses, please take a course first");
-                    else
-                        viewTeachersList();
+                    viewTeachersList();
                     break;
                 case 4:
-                    if (getCoursesTaken().isEmpty())
-                        System.out.println("You haven't taken any courses, please take a course first");
-                    else
-                        scoreTeachers();
+                    scoreTeachers();
                     break;
                 case 5:
-                    if (getCoursesTaken().isEmpty())
-                        System.out.println("You haven't taken any courses, please take a course first");
-                    else
-                        viewCoursesTaken();
+                    viewCoursesTaken();
                     break;
                 case 6:
-                    if (getCoursesTaken().isEmpty())
-                        System.out.println("You haven't taken any courses, please take a course first");
-                    else
-                        viewAssignments();
+                    viewAssignments();
+                    break;
+                case 7:
+                    commentTeachers();
+                    break;
+                case 8:
+                    viewComments();
                     break;
                 default:
                     System.out.println("Error: Option is not available, please choose from the list above");

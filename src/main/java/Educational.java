@@ -5,6 +5,8 @@ public class Educational extends Account {
 
     static ArrayList<Teacher> teachers = new ArrayList<>();
     static ArrayList<Student> students = new ArrayList<>();
+    ArrayList<Comment> comments = new ArrayList<>();
+
     private ArrayList<Course> coursesTaken = new ArrayList<>();
 
     private String house;
@@ -60,6 +62,14 @@ public class Educational extends Account {
 
     }
 
+    void viewComments() {
+        System.out.println("~~| View Comments |~~\n");
+        int i = 0;
+        for (Comment comment : comments) {
+            i++;
+            System.out.println(i + "." + comment.comment);
+        }
+    }
 
     public void viewCoursesTaken() {
         System.out.println("~~| View Courses Taken |~~\n");
