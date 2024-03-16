@@ -1,8 +1,8 @@
 public class Comment {
     String comment;
-    Educational commentor;
+    Account commentor;
 
-    public Comment(String comment, Educational commentor) {
+    public Comment(String comment, Account commentor) {
         this.comment = comment;
         this.commentor = commentor;
     }
