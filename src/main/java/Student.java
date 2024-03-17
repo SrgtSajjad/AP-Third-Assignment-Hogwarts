@@ -3,8 +3,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Student extends Educational {
-    ArrayList<Teacher> positiveFeedback = new ArrayList<>();
-    ArrayList<Teacher> negativeFeedback = new ArrayList<>();
+    ArrayList<Account> positiveFeedback = new ArrayList<>();
+    ArrayList<Account> negativeFeedback = new ArrayList<>();
     int score;
 
     public Student(String username, String password, String role) {
@@ -159,8 +159,8 @@ public class Student extends Educational {
         Teacher teacher = getCoursesTaken().get(number - 1).getTeacher();
         boolean hasCommented = false;
         int commentIndex = 0;
-        for (Comment comment : teacher.getComments()) {
-            if (comment.commentor == this) {
+        for (Message comment : teacher.getComments()) {
+            if (comment.writer == this) {
                 hasCommented = true;
                 commentIndex = teacher.getComments().indexOf(comment);
                 break;
@@ -170,7 +170,7 @@ public class Student extends Educational {
         while (flag) {
             System.out.println(teacher.getUsername() + ":\n0. Exit\n1. Set/Edit comment\n2. Delete comment");
             if (hasCommented)
-                System.out.println("Your current comment: \"" + teacher.getComments().get(commentIndex).comment + "\"");
+                System.out.println("Your current comment: \"" + teacher.getComments().get(commentIndex).text + "\"");
             number = scanner.nextInt();
             switch (number) {
                 case 0:
@@ -180,7 +180,7 @@ public class Student extends Educational {
                     if (hasCommented)
                         teacher.getComments().remove(commentIndex);
                     System.out.print("Your comment: ");
-                    teacher.getComments().add(new Comment(scanner.nextLine(), this));
+                    teacher.getComments().add(new Message(scanner.nextLine(), this));
                     break;
                 case 2:
                     if (hasCommented) {

@@ -5,7 +5,7 @@ public class Educational extends Account {
 
     private static ArrayList<Teacher> teachers = new ArrayList<>();
     private static ArrayList<Student> students = new ArrayList<>();
-    private ArrayList<Comment> comments = new ArrayList<>();
+    private ArrayList<Message> comments = new ArrayList<>();
 
     private ArrayList<Course> coursesTaken = new ArrayList<>();
 
@@ -65,9 +65,9 @@ public class Educational extends Account {
     void viewComments() {
         System.out.println("~~| View Comments |~~\n");
         int i = 0;
-        for (Comment comment : comments) {
+        for (Message comment : comments) {
             i++;
-            System.out.println(i + "." + comment.comment);
+            System.out.println(i + "." + comment.text);
         }
     }
 
@@ -129,7 +129,7 @@ public class Educational extends Account {
         return coursesTaken;
     }
 
-    public ArrayList<Comment> getComments() {
+    public ArrayList<Message> getComments() {
         return comments;
     }
 

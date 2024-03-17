@@ -3,8 +3,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Teacher extends Educational {
-    ArrayList<Student> positiveFeedback = new ArrayList<>();
-    ArrayList<Student> negativeFeedback = new ArrayList<>();
+    ArrayList<Account> positiveFeedback = new ArrayList<>();
+    ArrayList<Account> negativeFeedback = new ArrayList<>();
     int score;
 
     public Teacher(String username, String password, String role) {
@@ -82,6 +82,10 @@ public class Teacher extends Educational {
         }
         System.out.println("Lecture has ended.");
         }
+    }
+
+    public void requestCourses() {
+
     }
 
     public void takeCourses() {
@@ -263,8 +267,8 @@ public class Teacher extends Educational {
         Student student = course.participatingStudents.get(number - 1);
         boolean hasCommented = false;
         int commentIndex = 0;
-        for (Comment comment : student.getComments()) {
-            if (comment.commentor == this) {
+        for (Message comment : student.getComments()) {
+            if (comment.writer == this) {
                 hasCommented = true;
                 commentIndex = student.getComments().indexOf(comment);
                 break;
@@ -274,7 +278,7 @@ public class Teacher extends Educational {
         while (flag) {
             System.out.println(student.getUsername() + ":\n0. Exit\n1. Set/Edit comment\n2. Delete comment");
             if (hasCommented)
-                System.out.println("Your current comment: \"" + student.getComments().get(commentIndex).comment + "\"");
+                System.out.println("Your current comment: \"" + student.getComments().get(commentIndex).text + "\"");
             number = scanner.nextInt();
             switch (number) {
                 case 0:
@@ -284,7 +288,7 @@ public class Teacher extends Educational {
                     if (hasCommented)
                         student.getComments().remove(commentIndex);
                     System.out.print("Your comment: ");
-                    student.getComments().add(new Comment(scanner.nextLine(), this));
+                    student.getComments().add(new Message(scanner.nextLine(), this));
                     break;
                 case 2:
                     if (hasCommented) {
