@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class Assistant extends Account {
     static ArrayList<Assistant> assistants = new ArrayList<>();
+    private static ArrayList<Message> courseRequests = new ArrayList<>();
+    private static ArrayList<SignUpRequest> signUpRequests = new ArrayList<>();
+
 
     public Assistant(String username, String password, String role) {
         super(username, password, role);
@@ -39,6 +42,112 @@ public class Assistant extends Account {
         }
         System.out.println("Error: Login failed");
         return null;
+    }
+
+    public void viewCourseRequests() {
+        System.out.println("~~| Course Requests |~~\n");
+        int i = 0;
+        System.out.println("0. Exit");
+        for (Message request : courseRequests) {
+            i++;
+            System.out.println(i + "Title: " + request.text + " requested by " + request.writer);
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Choose a requested course: ");
+        while (true) {
+            i = scanner.nextInt();
+            if (i >= 0 && i < courseRequests.size())
+                break;
+            System.out.println("Error: Please choose from the list above");
+        }
+        if (i != 0) {
+            Message selectedRequest = courseRequests.get(i - 1);
+            System.out.println("Selected course: " + selectedRequest.text + "\n0. Exit\n1. Approve\n2. Deny");
+            while (true) {
+                i = scanner.nextInt();
+                if (i >= 0 && i < 3)
+                    break;
+                System.out.println("Error: Please choose from the list above");
+            }
+
+            switch (i) {
+                case 0:
+                    break;
+                case 1:
+                    Course course = new Course(selectedRequest.text, null);
+                    Course.getCourses().add(course);
+                    courseRequests.remove(selectedRequest);
+                    System.out.println("Course added successfully");
+                    break;
+                case 2:
+                    courseRequests.remove(selectedRequest);
+                    System.out.println("Course request was denied");
+                    break;
+
+            }
+
+        }
+
+    }
+
+    public void viewAccountRequests() {
+        System.out.println("~~| Account Requests |~~\n");
+        int i = 0;
+        System.out.println("0. Exit");
+        for (SignUpRequest request : signUpRequests) {
+            i++;
+            System.out.println(i + "Username: " + request.username + ", Role: " + request.role);
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Choose a request: ");
+        while (true) {
+            i = scanner.nextInt();
+            if (i >= 0 && i < signUpRequests.size())
+                break;
+            System.out.println("Error: Please choose from the list above");
+        }
+        if (i != 0) {
+            SignUpRequest selectedRequest = signUpRequests.get(i - 1);
+            System.out.println("Selected request: " + selectedRequest.username + "as a " + selectedRequest.role + "\n0. Exit\n1. Approve\n2. Deny");
+            while (true) {
+                i = scanner.nextInt();
+                if (i >= 0 && i < 3)
+                    break;
+                System.out.println("Error: Please choose from the list above");
+            }
+
+            switch (i) {
+                case 0:
+                    break;
+                case 1:
+                    if (Objects.equals(selectedRequest.role, "teacher")) {
+                        Teacher teacher = new Teacher(selectedRequest.username, selectedRequest.password, "teacher");
+                        Educational.getTeachers().add(teacher);
+                    } else if (Objects.equals(selectedRequest.role, "student")) {
+                        Student student = new Student(selectedRequest.username, selectedRequest.password, "student");
+                        Educational.getStudents().add(student);
+                    }
+                    signUpRequests.remove(selectedRequest);
+                    System.out.println("Account created successfully");
+                    break;
+                case 2:
+                    signUpRequests.remove(selectedRequest);
+                    System.out.println("Account request was denied");
+                    break;
+
+            }
+
+        }
+    }
+
+    public static ArrayList<Message> getCourseRequests() {
+        return courseRequests;
+    }
+
+    public static ArrayList<SignUpRequest> getSignUpRequests() {
+        return signUpRequests;
     }
 
     public void createCourse() {
@@ -164,7 +273,6 @@ public class Assistant extends Account {
 
     }
 
-    // TODO add student and teacher approval methods
 
     public void menu() {
     }
