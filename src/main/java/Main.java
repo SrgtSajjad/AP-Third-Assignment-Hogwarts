@@ -52,18 +52,61 @@ public class Main {
             }
             System.out.println("Error: Role is invalid, please choose an option from above");
         }
-        System.out.print("Username: ");
-        String username = scanner.next();
-        System.out.print("Password: ");
-        String password = scanner.next();
+        String username;
         if (role == 1) {
-            System.out.println("Please wait for an admin to accept your request");
-            SignUpRequest signUpRequest = new SignUpRequest(username, password, "teacher");
-            Assistant.getSignUpRequests().add(signUpRequest);
+            boolean accountable = true;
+            while (true) {
+                System.out.print("Username: ");
+                username = scanner.next();
+                if (Objects.equals(username, "exit")) {
+                    accountable = false;
+                    break;
+                }
+                for (Teacher teacher : Educational.getTeachers()) {
+                    if (Objects.equals(username, teacher.getUsername())) {
+                        accountable = false;
+                        System.out.print("Error: There is an account with this username\n(Type \"exit\" to exit to menu");
+                        break;
+                    }
+                }
+                if (accountable)
+                    break;
+            }
+
+            if (accountable) {
+                System.out.print("Password: ");
+                String password = scanner.next();
+                System.out.println("Please wait for an admin to accept your request");
+                SignUpRequest signUpRequest = new SignUpRequest(username, password, "teacher");
+                Assistant.getSignUpRequests().add(signUpRequest);
+            }
         } else if (role == 2) {
-            System.out.println("Please wait for an admin to accept your request");
-            SignUpRequest signUpRequest = new SignUpRequest(username, password, "student  ");
-            Assistant.getSignUpRequests().add(signUpRequest);
+            boolean accountable = true;
+            while (true) {
+                System.out.print("Username: ");
+                username = scanner.next();
+                if (Objects.equals(username, "exit")) {
+                    accountable = false;
+                    break;
+                }
+                for (Student student : Educational.getStudents()) {
+                    if (Objects.equals(username, student.getUsername())) {
+                        accountable = false;
+                        System.out.print("Error: There is an account with this username\n(Type \"exit\" to exit to menu");
+                        break;
+                    }
+                }
+                if (accountable)
+                    break;
+            }
+
+            if (accountable) {
+                System.out.print("Password: ");
+                String password = scanner.next();
+                System.out.println("Please wait for an admin to accept your request");
+                SignUpRequest signUpRequest = new SignUpRequest(username, password, "student  ");
+                Assistant.getSignUpRequests().add(signUpRequest);
+            }
         }
 
     }
