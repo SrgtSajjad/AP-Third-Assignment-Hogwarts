@@ -85,7 +85,13 @@ public class Teacher extends Educational {
     }
 
     public void requestCourses() {
-
+        System.out.println("~~| Request a Course |~~\n");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a title for your course: ");
+        String title = scanner.nextLine();
+        Message request = new Message(title, this);
+        Assistant.getCourseRequests().add(request);
+        System.out.println("Request sent successfully");
     }
 
     public void takeCourses() {
@@ -345,6 +351,7 @@ public class Teacher extends Educational {
                     "\n7. Set Assignment" +
                     "\n8. Comment a Student" +
                     "\n9. View Your Comments" +
+                    "\n10. Request a Course" +
                     "\n0. Exit");
             Scanner scanner = new Scanner(System.in);
             int command;
@@ -384,6 +391,9 @@ public class Teacher extends Educational {
                     break;
                 case 9:
                     viewComments();
+                    break;
+                case 10:
+                    requestCourses();
                     break;
                 default:
                     System.out.println("Error: Option is not available, please choose from the list above");
