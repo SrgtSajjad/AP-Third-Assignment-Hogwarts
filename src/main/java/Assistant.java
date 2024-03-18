@@ -273,7 +273,154 @@ public class Assistant extends Account {
 
     }
 
+    public void viewCoursesAndStudentsList() {
+        System.out.println("~~| Score Students |~~\n");
+        Scanner scanner = new Scanner(System.in);
+        int number;
+        int i = 0;
+        System.out.println("Choose a course: ");
+
+        for (Course course : Course.getCourses()) { // display courses taken by teacher
+            i++;
+            System.out.println(i + "." + course.getTitle());
+        }
+
+        while (true) { // get number of a course and handle errors
+            number = scanner.nextInt();
+            if (number - 1 <= Course.getCourses().size()) {
+                break;
+            } else {
+                System.out.println("Error: Course unavailable, please select a number from above");
+            }
+        }
+        Course course = Course.getCourses().get(number - 1); // create a reference to the selected course
+        System.out.println("Students participating in " + Course.getCourses().get(number - 1).getTitle() + ":");
+        i = 0;
+        for (Student student : Course.getCourses().get(number - 1).participatingStudents) { // display students participating in the specific class
+            i++;
+            System.out.println(i + "." + student.getUsername());
+        }
+
+
+
+    }
+    public void checkStudentProfiles() {
+        int number;
+        Scanner scanner = new Scanner(System.in);
+        int i = 0;
+        for (Student student: Educational.getStudents()) {
+            i++;
+            System.out.println(i + "." + student.getUsername());
+        }
+        System.out.println("Choose a student from the list above: ");
+        while (true) { // get number of student in the participating student's list and handle errors
+            number = scanner.nextInt();
+            if (number - 1 <= Educational.getStudents().size()) {
+                break;
+            } else {
+                System.out.println("Error: Student unavailable, please select a number from above");
+            }
+        }
+
+        Student student = Educational.getStudents().get(number - 1);
+
+        System.out.println("Student's Profile: ");
+        System.out.println("Name: " + student.getFullName());
+        System.out.println("Username: " + student.getUsername());
+        System.out.println("Age: " + student.getAge());
+        System.out.println("Speciality: " + student.getSpeciality());
+        System.out.println("House: " + student.getHouse());
+        System.out.println("Courses Taken: ");
+        i = 0;
+        for (Course course:student.getCoursesTaken()) {
+            i++;
+            System.out.println(i + "." + course.getTitle() + " by " + course.getTeacher().getUsername());
+        }
+    }
+    public void checkTeacherProfiles() {
+        int number;
+        Scanner scanner = new Scanner(System.in);
+        int i = 0;
+        for (Teacher teacher: Educational.getTeachers()) {
+            i++;
+            System.out.println(i + "." + teacher.getUsername());
+        }
+        System.out.println("Choose a student from the list above: ");
+        while (true) { // get number of student in the participating student's list and handle errors
+            number = scanner.nextInt();
+            if (number - 1 <= Educational.getTeachers().size()) {
+                break;
+            } else {
+                System.out.println("Error: Student unavailable, please select a number from above");
+            }
+        }
+
+        Teacher teacher = Educational.getTeachers().get(number - 1);
+
+        System.out.println("Student's Profile: ");
+        System.out.println("Name: " + teacher.getFullName());
+        System.out.println("Username: " + teacher.getUsername());
+        System.out.println("Age: " + teacher.getAge());
+        System.out.println("Speciality: " + teacher.getSpeciality());
+        System.out.println("House: " + teacher.getHouse());
+        System.out.println("Courses Taken: ");
+        i = 0;
+        for (Course course:teacher.getCoursesTaken()) {
+            i++;
+            System.out.println(i + "." + course.getTitle());
+        }
+    }
 
     public void menu() {
+        boolean flag = true;
+        while (flag) {
+            System.out.println("~~| Assistant Menu |~~\n" +
+                    "\nUsername: " + getUsername() +
+                    "\n1. View Account Requests" +
+                    "\n2. View Course Requests" +
+                    "\n3. Create a Course" +
+                    "\n4. Remove Teacher" +
+                    "\n5. Remove Student" +
+                    "\n6. View Courses and Students Participating" +
+                    "\n7. Check Teacher Profiles" +
+                    "\n8. Check Student Profiles" +
+                    "\n0. Exit");
+            Scanner scanner = new Scanner(System.in);
+            int command;
+            System.out.print("Your command: ");
+            command = scanner.nextInt();
+            switch (command) {
+                case 0:
+                    flag = false;
+                    break;
+                case 1:
+                    viewAccountRequests();
+                    break;
+                case 2:
+                    viewCourseRequests();
+                    break;
+                case 3:
+                    createCourse();
+                    break;
+                case 4:
+                    removeTeacher();
+                    break;
+                case 5:
+                    removeStudent();
+                    break;
+                case 6:
+                    viewCoursesAndStudentsList();
+                    break;
+                case 7:
+                    checkTeacherProfiles();
+                    break;
+                case 8:
+                    checkStudentProfiles();
+                    break;
+                default:
+                    System.out.println("Error: Option is not available, please choose from the list above");
+            }
+            System.out.println("--------------------------------");
+        }
     }
 }

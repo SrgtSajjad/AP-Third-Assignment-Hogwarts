@@ -38,7 +38,7 @@ public class Educational extends Account {
     public void viewProfile() {
         System.out.println("~~| Profile |~~\n");
         System.out.println("Name: " + this.getFullName());
-        System.out.println("Username: " + getUsername());
+        System.out.println("Username: " + this.getUsername());
         System.out.println("Age: " + this.getAge());
         System.out.println("Speciality: " + this.getSpeciality());
         System.out.println("House: " + this.getHouse());
