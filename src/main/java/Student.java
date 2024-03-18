@@ -214,6 +214,7 @@ public class Student extends Educational {
                     "\n6. View Assignments" +
                     "\n7. Comment Teachers" +
                     "\n8. View Comments" +
+                    "\n9. View Profile" +
                     "\n0. Exit");
             Scanner scanner = new Scanner(System.in);
             int command;
@@ -251,9 +252,13 @@ public class Student extends Educational {
                 case 8:
                     viewComments();
                     break;
+                case 9:
+                    viewProfile();
+                    break;
                 default:
                     System.out.println("Error: Option is not available, please choose from the list above");
             }
+            System.out.println("--------------------------------");
         }
     }
 }

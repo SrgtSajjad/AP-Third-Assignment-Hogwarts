@@ -35,6 +35,15 @@ public class Educational extends Account {
         }
     }
 
+    public void viewProfile() {
+        System.out.println("~~| Profile |~~\n");
+        System.out.println("Name: " + this.getFullName());
+        System.out.println("Username: " + getUsername());
+        System.out.println("Age: " + this.getAge());
+        System.out.println("Speciality: " + this.getSpeciality());
+        System.out.println("House: " + this.getHouse());
+    }
+
     public void changeAccountCredentials() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose which you'd like to change:\n1. Username\n2. Password\n0. Exit");

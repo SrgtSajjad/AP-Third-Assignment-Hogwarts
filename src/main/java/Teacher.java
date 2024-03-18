@@ -70,17 +70,17 @@ public class Teacher extends Educational {
 
         if (course != null) {
 
-        Scanner microphone = new Scanner(System.in);
-        while (true) {
-            String lecture = microphone.nextLine();
-            if (Objects.equals(lecture, "exit")) {
-                break;
+            Scanner microphone = new Scanner(System.in);
+            while (true) {
+                String lecture = microphone.nextLine();
+                if (Objects.equals(lecture, "exit")) {
+                    break;
+                }
+                System.out.println("Course: " + course.getTitle());
+                System.out.println("Teacher: " + getUsername());
+                System.out.println("Lecture: " + lecture);
             }
-            System.out.println("Course: " + course.getTitle());
-            System.out.println("Teacher: " + getUsername());
-            System.out.println("Lecture: " + lecture);
-        }
-        System.out.println("Lecture has ended.");
+            System.out.println("Lecture has ended.");
         }
     }
 
@@ -352,6 +352,7 @@ public class Teacher extends Educational {
                     "\n8. Comment a Student" +
                     "\n9. View Your Comments" +
                     "\n10. Request a Course" +
+                    "\n11. View Profile" +
                     "\n0. Exit");
             Scanner scanner = new Scanner(System.in);
             int command;
@@ -395,9 +396,13 @@ public class Teacher extends Educational {
                 case 10:
                     requestCourses();
                     break;
+                case 11:
+                    viewProfile();
+                    break;
                 default:
                     System.out.println("Error: Option is not available, please choose from the list above");
             }
+            System.out.println("--------------------------------");
         }
     }
 
