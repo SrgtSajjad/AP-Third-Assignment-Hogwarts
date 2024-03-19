@@ -1,20 +1,20 @@
-/*
-    TODO: Import all the classes that you have defined and make use of them to build the program.
- */
-
-
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        createDataBase();
+        createData();
         while (true) {
-            runMenu();
+            System.out.println("1. Login\n2. Sign Up\n3. Exit");
+            Scanner scanner = new Scanner(System.in);
+            int command = scanner.nextInt();
+            if (command == 3)
+                break;
+            runMenu(command);
         }
     }
 
-    private static void createDataBase() {
+    private static void createData() {
         Teacher teacher1 = new Teacher("Snape", "1234", "teacher");
         teacher1.setSignedUp(true);
         Student student1 = new Student("Harry", "1234", "student");
@@ -27,18 +27,17 @@ public class Main {
 
     }
 
-    public static void runMenu() {
-        System.out.println("1. Login\n2. Sign Up");
-        Scanner scanner = new Scanner(System.in);
-        switch (scanner.nextInt()) {
+    public static void runMenu(int command) {
+        switch (command) {
             case 1:
                 login();
                 break;
             case 2:
                 signUp();
                 break;
+            default:
+                System.out.println("Invalid Input!");
         }
-        runMenu();
     }
 
     public static void signUp() {
