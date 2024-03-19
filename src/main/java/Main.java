@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         createData();
         while (true) {
+            System.out.println("~~| Main Menu |~~");
             System.out.println("1. Login\n2. Sign Up\n3. Exit");
             Scanner scanner = new Scanner(System.in);
             int command = scanner.nextInt();
