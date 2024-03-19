@@ -16,15 +16,38 @@ public class Main {
     }
 
     private static void createData() {
+        // Set Teachers
         Teacher teacher1 = new Teacher("Snape", "1234", "teacher");
+        teacher1.setHouse("Slytherin");
+        teacher1.setFullName("Severus Snape");
+        teacher1.setAge(38);
+        teacher1.setSpeciality("Potion Master");
         teacher1.setSignedUp(true);
-        Student student1 = new Student("Harry", "1234", "student");
-        student1.setSignedUp(true);
+        Educational.getTeachers().add(teacher1);
+
+
+        // Set Courses
         Course course1 = new Course("Magic", null);
         Course.getCourses().add(course1);
-        Educational.getTeachers().add(teacher1);
+        Course course2 = new Course("Potion Brewing", teacher1);
+        Course.getCourses().add(course2);
+
+        teacher1.getCoursesTaken().add(course2);
+
+
+        // Set Students
+        Student student1 = new Student("Harry", "1234", "student");
+        student1.setHouse("Gryffindor");
+        student1.setFullName("Harry Potter");
+        student1.setAge(18);
+        student1.setSpeciality("Invisibility Cloak");
+        student1.setSignedUp(true);
         Educational.getStudents().add(student1);
 
+
+        // Set Assistant
+        Assistant assistant1 = new Assistant("Sajjad", "1234", "assistant");
+        Assistant.assistants.add(assistant1);
 
     }
 
@@ -104,7 +127,7 @@ public class Main {
                 System.out.print("Password: ");
                 String password = scanner.next();
                 System.out.println("Please wait for an admin to accept your request");
-                SignUpRequest signUpRequest = new SignUpRequest(username, password, "student  ");
+                SignUpRequest signUpRequest = new SignUpRequest(username, password, "student");
                 Assistant.getSignUpRequests().add(signUpRequest);
             }
         }

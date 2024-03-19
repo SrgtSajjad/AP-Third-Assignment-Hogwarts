@@ -12,6 +12,9 @@ public class Educational extends Account {
     ArrayList<Account> negativeFeedback = new ArrayList<>();
     private int score;
 
+    public void setHouse(String house) {
+        this.house = house;
+    }
     private String house;
     private boolean sortingQuizCapability;
 

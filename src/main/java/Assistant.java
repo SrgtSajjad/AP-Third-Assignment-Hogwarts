@@ -50,14 +50,14 @@ public class Assistant extends Administrator {
         System.out.println("0. Exit");
         for (Message request : courseRequests) {
             i++;
-            System.out.println(i + "Title: " + request.text + " requested by " + request.writer);
+            System.out.println(i + ". Title: " + request.text + " requested by " + request.writer.getUsername());
         }
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Choose a requested course: ");
         while (true) {
             i = scanner.nextInt();
-            if (i >= 0 && i < courseRequests.size())
+            if (i >= 0 && i <= courseRequests.size())
                 break;
             System.out.println("Error: Please choose from the list above");
         }
@@ -97,20 +97,20 @@ public class Assistant extends Administrator {
         System.out.println("0. Exit");
         for (SignUpRequest request : signUpRequests) {
             i++;
-            System.out.println(i + "Username: " + request.username + ", Role: " + request.role);
+            System.out.println(i + ". Username: " + request.username + ", Role: " + request.role);
         }
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Choose a request: ");
         while (true) {
             i = scanner.nextInt();
-            if (i >= 0 && i < signUpRequests.size())
+            if (i >= 0 && i <= signUpRequests.size())
                 break;
             System.out.println("Error: Please choose from the list above");
         }
         if (i != 0) {
             SignUpRequest selectedRequest = signUpRequests.get(i - 1);
-            System.out.println("Selected request: " + selectedRequest.username + "as a " + selectedRequest.role + "\n0. Exit\n1. Approve\n2. Deny");
+            System.out.println("Selected request: " + selectedRequest.username + " as a " + selectedRequest.role + "\n0. Exit\n1. Approve\n2. Deny");
             while (true) {
                 i = scanner.nextInt();
                 if (i >= 0 && i < 3)

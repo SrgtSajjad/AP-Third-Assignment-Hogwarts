@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Teacher extends Educational {
 
 
-
     public Teacher(String username, String password, String role) {
         super(username, password, role);
     }
@@ -111,7 +110,7 @@ public class Teacher extends Educational {
             if (i == 0) {
                 break;
             } else if (Course.getCourses().get(i - 1).getTeacher() != null) {
-                System.out.print("This course already has a teacher, please choose another one");
+                System.out.println("This course already has a teacher, please choose another one");
             } else if (i - 1 < Course.getCourses().size() && i - 1 >= 0) {
                 Course course = Course.getCourses().get(i - 1);
                 course.setTeacher(this);
@@ -119,7 +118,7 @@ public class Teacher extends Educational {
                 break;
             }
 
-            System.out.print("Error: Course unavailable, please choose from the list above");
+            System.out.println("Error: Course unavailable, please choose from the list above");
         }
     }
 
@@ -220,7 +219,7 @@ public class Teacher extends Educational {
             }
         }
 
-        System.out.println("Students participating in " + getCoursesTaken().get(number - 1).getTitle());
+        System.out.println("Students participating in " + getCoursesTaken().get(number - 1).getTitle() + ":");
         i = 0;
         for (Student student : getCoursesTaken().get(number - 1).participatingStudents) {
             i++;
@@ -253,6 +252,7 @@ public class Teacher extends Educational {
         Course course = getCoursesTaken().get(number - 1); // create a reference to the selected course
         System.out.println("Students participating in " + getCoursesTaken().get(number - 1).getTitle() + ":");
         i = 0;
+        System.out.println("0. Exit");
         for (Student student : getCoursesTaken().get(number - 1).participatingStudents) { // display students participating in the specific class
             i++;
             System.out.println(i + "." + student.getUsername());
@@ -262,7 +262,9 @@ public class Teacher extends Educational {
         System.out.println("Choose a student from the list above: ");
         while (true) { // get number of student in the participating student's list and handle errors
             number = scanner.nextInt();
-            if (number - 1 <= course.participatingStudents.size()) {
+            if (number == 0)
+                return;
+            else if (number < course.participatingStudents.size()) {
                 break;
             } else {
                 System.out.println("Error: Student unavailable, please select a number from above");
@@ -326,10 +328,9 @@ public class Teacher extends Educational {
             }
         }
         Course course = getCoursesTaken().get(number - 1);
-        System.out.print("Set an assignment for this course: ");
-        String assignment = scanner.nextLine();
-        course.setAssignment(assignment);
-        System.out.print("Assignment set successfully");
+        System.out.println("Set an assignment for this course: ");
+        course.setAssignment(scanner.nextLine());
+        System.out.println("Assignment set successfully");
 
     }
 
