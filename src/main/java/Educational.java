@@ -8,6 +8,9 @@ public class Educational extends Account {
     private ArrayList<Message> comments = new ArrayList<>();
 
     private ArrayList<Course> coursesTaken = new ArrayList<>();
+    ArrayList<Account> positiveFeedback = new ArrayList<>();
+    ArrayList<Account> negativeFeedback = new ArrayList<>();
+    private int score;
 
     private String house;
     private boolean sortingQuizCapability;
@@ -33,6 +36,11 @@ public class Educational extends Account {
         } else {
             System.out.println("You have already completed Sign Up");
         }
+    }
+
+    public int getScore() {
+        score = positiveFeedback.size() - negativeFeedback.size();
+        return score;
     }
 
     public void viewProfile() {

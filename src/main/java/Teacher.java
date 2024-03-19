@@ -3,9 +3,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Teacher extends Educational {
-    ArrayList<Account> positiveFeedback = new ArrayList<>();
-    ArrayList<Account> negativeFeedback = new ArrayList<>();
-    int score;
+
+
 
     public Teacher(String username, String password, String role) {
         super(username, password, role);
@@ -337,11 +336,10 @@ public class Teacher extends Educational {
     public void menu() {
         boolean flag = true;
         while (flag) {
-            score = positiveFeedback.size() - negativeFeedback.size();
             System.out.println("~~| Teacher Menu |~~\n" +
                     "\nUsername: " + getUsername() +
                     "\nHouse: " + getHouse() +
-                    "\nScore: " + score +
+                    "\nScore: " + getScore() +
                     "\n1. Change Account Credentials" +
                     "\n2. Take Course" +
                     "\n3. View Student's List" +

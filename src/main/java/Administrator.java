@@ -161,6 +161,7 @@ public class Administrator extends Account {
         System.out.println("Student's Profile: ");
         System.out.println("Name: " + student.getFullName());
         System.out.println("Username: " + student.getUsername());
+        System.out.println("Score: " + student.getScore());
         System.out.println("Age: " + student.getAge());
         System.out.println("Speciality: " + student.getSpeciality());
         System.out.println("House: " + student.getHouse());
@@ -198,6 +199,7 @@ public class Administrator extends Account {
         System.out.println("Teacher's Profile: ");
         System.out.println("Name: " + teacher.getFullName());
         System.out.println("Username: " + teacher.getUsername());
+        System.out.println("Score: " + teacher.getScore());
         System.out.println("Age: " + teacher.getAge());
         System.out.println("Speciality: " + teacher.getSpeciality());
         System.out.println("House: " + teacher.getHouse());
