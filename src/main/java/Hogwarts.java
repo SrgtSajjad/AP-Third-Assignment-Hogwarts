@@ -7,7 +7,7 @@ public class Hogwarts extends Administrator {
     Student hogwartsStudent = new Student("Jake", "1234", "student"); // student account for accessing student's menu
 
     public Hogwarts() {
-        super("Dumbledore", "VoldemortShouldDie", "Hogwarts");
+        super("Dumbledore", "CuriosityIsNotSin", "Hogwarts");
     }
 
     public static Hogwarts login() {

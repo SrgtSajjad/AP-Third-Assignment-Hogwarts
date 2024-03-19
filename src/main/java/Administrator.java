@@ -76,7 +76,7 @@ public class Administrator extends Account {
         }
 
         if (selectedStudent != null) {
-            System.out.println("Confirm remove of the teacher: " + selectedStudent.getUsername() + "?\n1. Yes\n2.No");
+            System.out.println("Confirm remove of the student: " + selectedStudent.getUsername() + "?\n1. Yes\n2.No");
             boolean flag = true;
             int confirmation = scanner.nextInt();
             while (flag) {

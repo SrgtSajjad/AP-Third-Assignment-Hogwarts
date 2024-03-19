@@ -1,4 +1,4 @@
-# Project Title
+# CineScribe
 
 Hogwarts School Management Program
 
@@ -9,53 +9,60 @@ Every person from student to *"Dumbledore"* Himself in Hogwarts school of witchc
 ## Getting Started
 
 ### Dependencies
-
+* IntelliJ for running the code
+* Gradle as package manager
+* "org.junit.jupiter:junit-jupiter"
+* "org.junit:junit-bom:5.9.1"
 * "commons-codec:commons-codec:1.16.1" for hashing passwords
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* The app can be cloned from [*GitHub*](https://github.com/SrgtSajjad/AP-Third-Assignment-Hogwarts.git)
+* Download Gradle 8.6 from [*Gradle*](https://gradle.org/releases/)
+* Download IntelliJ IDEA community version from [*JetBrains*](https://www.jetbrains.com/idea/download/)
+* Download Java from [*Oracle*](https://www.oracle.com/java/technologies/downloads/)
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+1. Run the program using IntelliJ
+2. Enter login credentials from the ***"Account Credentials"*** listed below this section (program is case-sensitive)
+3. Use the menu dedicated to each class by typing in the ***"number"*** of the option you would like to check out
+4. **WARNING!** Do not enter strings if you are not asked, the program may crash
+5. You can create new accounts by Signing Up and then logging into an assistant's  account and accepting your request
+6. The rest of the program is self-explanatory
+* * * 
+### Account Credentials
+* Teacher: 
+  * Username: Snape
+  * Password: 1234
+* Student:
+  * Username: Harry
+  * Password: 1234
+* Assistant: 
+  * Username: Hermione
+  * Password: 1234
+* Hogwarts:
+  * Username: Dumbledore
+  * Password: CuriosityIsNotSin
+* * *
+## Tasks Completed
+Check the UML diagrams below:
 
-## Help
+1. <img src="./Account Management.png" alt="Image">
+2. <img src="./Account.png" alt="Image">
+3. <img src="./Educational.png" alt="Image">
+4. <img src="./Teacher.png" alt="Image">
+5. <img src="./Student.png" alt="Image">
+6. <img src="./Administrator.png" alt="Image">
+7. <img src="./Assistant.png" alt="Image">
+8. <img src="./Hogwarts.png" alt="Image">
+9. <img src="./Course.png" alt="Image">
+10. <img src="./Message.png" alt="Image">
+11. <img src="./Sign Up Request.png" alt="Image">
+12. <img src="./Main.png" alt="Image">
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
-
+* * * 
 ## Authors
 
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
-
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+Mohammad Sajjad Zanganeh
+[@SrgtSajjad](https://github.com/SrgtSajjad)

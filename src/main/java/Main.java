@@ -46,7 +46,7 @@ public class Main {
 
 
         // Set Assistant
-        Assistant assistant1 = new Assistant("Sajjad", "1234", "assistant");
+        Assistant assistant1 = new Assistant("Hermione", "1234", "assistant");
         Assistant.assistants.add(assistant1);
 
     }
@@ -128,6 +128,35 @@ public class Main {
                 String password = scanner.next();
                 System.out.println("Please wait for an admin to accept your request");
                 SignUpRequest signUpRequest = new SignUpRequest(username, password, "student");
+                Assistant.getSignUpRequests().add(signUpRequest);
+            }
+        }
+
+        else if (role == 3) {
+            boolean accountable = true;
+            while (true) {
+                System.out.print("Username: ");
+                username = scanner.next();
+                if (Objects.equals(username, "exit")) {
+                    accountable = false;
+                    break;
+                }
+                for (Assistant assistant : Assistant.assistants) {
+                    if (Objects.equals(username, assistant.getUsername())) {
+                        accountable = false;
+                        System.out.print("Error: There is an account with this username\n(Type \"exit\" to exit to menu");
+                        break;
+                    }
+                }
+                if (accountable)
+                    break;
+            }
+
+            if (accountable) {
+                System.out.print("Password: ");
+                String password = scanner.next();
+                System.out.println("Please wait for an admin to accept your request");
+                SignUpRequest signUpRequest = new SignUpRequest(username, password, "assistant");
                 Assistant.getSignUpRequests().add(signUpRequest);
             }
         }

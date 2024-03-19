@@ -128,6 +128,9 @@ public class Assistant extends Administrator {
                     } else if (Objects.equals(selectedRequest.role, "student")) {
                         Student student = new Student(selectedRequest.username, selectedRequest.password, "student");
                         Educational.getStudents().add(student);
+                    } else if (Objects.equals(selectedRequest.role, "assistant")) {
+                        Assistant assistant = new Assistant(selectedRequest.username, selectedRequest.password, "assistant");
+                        Assistant.assistants.add(assistant);
                     }
                     signUpRequests.remove(selectedRequest);
                     System.out.println("Account created successfully");
@@ -177,6 +180,49 @@ public class Assistant extends Administrator {
 
     }
 
+    private void removeAssistant() {
+        System.out.println("~~| Remove Assistant |~~\n");
+        int i = 0;
+        Assistant selectedAssistant = null;
+        System.out.println("0. Exit");
+        for (Assistant assistant : Assistant.assistants) {
+            i++;
+            System.out.println(i + ". " + assistant.getFullName());
+        }
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            i = scanner.nextInt();
+            if (i == 0) {
+                break;
+            } else if (i - 1 > 0 && i - 1 < Assistant.assistants.size()) {
+                selectedAssistant = Assistant.assistants.get(i - 1);
+                break;
+
+            } else
+                System.out.println("Error: Assistant unavailable, please choose from the list above");
+        }
+
+        if (selectedAssistant != null) {
+            System.out.println("Confirm remove of the assistant: " + selectedAssistant.getUsername() + "?\n1. Yes\n2.No");
+            boolean flag = true;
+            int confirmation = scanner.nextInt();
+            while (flag) {
+                switch (confirmation) {
+                    case 1:
+                        Assistant.assistants.remove(selectedAssistant);
+                        flag = false;
+                        System.out.println("Assistant removed successfully");
+                        break;
+                    case 2:
+                        flag = false;
+                        break;
+                    default:
+                        System.out.println("Error: Please choose one of the options above");
+                        break;
+                }
+            }
+        }
+    }
 
 
 
