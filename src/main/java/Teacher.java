@@ -328,6 +328,7 @@ public class Teacher extends Educational {
             }
         }
         Course course = getCoursesTaken().get(number - 1);
+        scanner.nextLine();
         System.out.println("Set an assignment for this course: ");
         course.setAssignment(scanner.nextLine());
         System.out.println("Assignment set successfully");
